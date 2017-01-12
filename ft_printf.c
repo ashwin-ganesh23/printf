@@ -1036,7 +1036,6 @@ int		ft_printf(const char *format, ...)
 			{
 				//put undefined char to str
 				flags->size += 1;
-				printf("%d\n", flags->size);
 				ft_putcharf(s[index++]);
 			}
 			setflags(&flags);
@@ -1051,16 +1050,16 @@ int		ft_printf(const char *format, ...)
 	return (flags->size);
 }
 
-int 	main(void)
-{
-	ft_printf("%%");
-	// ft_printf("%#5.4x\n", 20);
-	// printf("%#6.4x\n", 20);
-	// ft_printf("%s\n", "abcd\0");
-	// ft_printf("%s\n", "abcd\n");
+// int 	main(void)
+// {
+// 	ft_printf("%%");
+// 	// ft_printf("%#5.4x\n", 20);
+// 	// printf("%#6.4x\n", 20);
+// 	// ft_printf("%s\n", "abcd\0");
+// 	// ft_printf("%s\n", "abcd\n");
 
-	return(0);
-}
+// 	return(0);
+// }
 /*
 populate flags/fw/precision/length/
 itoabase
