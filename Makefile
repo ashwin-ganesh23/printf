@@ -9,7 +9,7 @@ RLIB = ranlib
 HEADER_DIR = -I fprintf.h
 
 SRCP =
-SRCP += printf.c
+SRCP += ft_printf.c
 #SRCP += flags.c
 #SRCP += ft_puts.c
 
