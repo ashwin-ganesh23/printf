@@ -6,7 +6,7 @@ LIB = ar rc
 
 RLIB = ranlib
 
-HEADER_DIR = -I fprintf.h
+HEADER_DIR = -I includes/fprintf.h
 
 SRCP =
 SRCP += ft_printf.c
@@ -211,6 +211,7 @@ OBJL += ft_toupper.o
 
 #OBJ = $(SRC:.c=.o)
 OBJP = $(SRCP:.c=.o)
+OBJSP = ft_printf.o
 
 all: $(NAME)
 
@@ -220,11 +221,11 @@ $(NAME):
 		@$(RLIB) $(NAME)
 
 clean:
-		@/bin/rm -f *.o
+		rm -f *.o
 
 fclean: clean
-		@/bin/rm -f $(NAME)
+		rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+# .PHONY: all clean fclean re
