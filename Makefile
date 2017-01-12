@@ -215,8 +215,8 @@ OBJP = $(SRCP:.c=.o)
 all: $(NAME)
 
 $(NAME):
-		$(GCCFLAGS) $(HEADER_DIR) $(SRCP) #$(SRC)
-		$(LIB) $(NAME) $(OBJP) #$(OBJL)
+		$(GCCFLAGS) $(HEADER_DIR) $(SRCP)
+		$(LIB) $(NAME) $(OBJP)
 		$(RLIB) $(NAME)
 
 clean:
