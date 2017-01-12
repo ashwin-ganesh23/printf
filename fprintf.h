@@ -36,13 +36,12 @@ typedef struct 	t_flags
 	int		z;
 	char	length;
 	char	*str;
-	int		specifier;
+	int		size;
 }				f_flags;
 
 extern void (*conv_id[14])(va_list ap, f_flags ff);
 
 char	*g_conv = "sSpdDioOuUxXcC";
-//int	char_count;
 
 void	ft_strdel(char **as);
 char	*ft_strjoin(char const *s1, char const *s2);
@@ -81,7 +80,9 @@ void	printdecimal(f_flags **flags);
 
 void 	putstrf(va_list ap, f_flags **flags);
 void	putptr(va_list ap, f_flags **flags);
-void 	putunsigned(va_list ap, f_flags **flags, int c);
+void 	putunsigned(va_list ap, f_flags **flags);
+void 	puthex(va_list ap, f_flags **flags);
+void 	putoctal(va_list ap, f_flags **flags);
 void 	putlint(va_list ap, f_flags **flags);
 
 void 	putuchar(va_list ap, f_flags **flags);

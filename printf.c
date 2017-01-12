@@ -417,33 +417,39 @@ void	printhex(f_flags **flags)
 	f_flags *f;
 	char *tmp;
 	int length;
+	int size;
 
 	f = *flags;
+	size = 0;
 	length = ft_strlen(f->str);
 	if (f->precision > length)
 		length = f->precision;
+	if (f->hash == 1)
+		size = 2;
+	length += size;
 	if (f->fw > length)
 	{
 		tmp = ft_strnew(f->fw);
+		ft_strlcat(tmp, "0x", 3);
 		if (f->neg == 1)
 		{
 			if ((int)ft_strlen(f->str) < length)
 			{
-				ft_strfill(tmp, '0', 0, length - ft_strlen(f->str));
-				ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str));
+				ft_strfill(tmp, '0', size, length - ft_strlen(f->str));
+				ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str) + 1);
 			}
 			else 
-				ft_strlcat(tmp, f->str, length + 1);
+				ft_strlcat(tmp + size, f->str, length + 1);
 			ft_strfill(tmp, ' ', length, f->fw);
 			tmp[f->fw] = '\0';
 		}
 		else
 		{
-			ft_strfill(tmp, ' ', 0, f->fw - length);
+			ft_strfill(tmp, ' ', size, f->fw - length);
 			if ((int)ft_strlen(f->str) < length)
 			{
 				ft_strfill(tmp, '0', f->fw - length, f->fw - ft_strlen(f->str));
-				ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str));
+				ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str) + 1);
 			}
 			else 
 				ft_strlcat(tmp + f->fw - length, f->str, length + 1);
@@ -453,13 +459,14 @@ void	printhex(f_flags **flags)
 	else
 	{
 		tmp = ft_strnew(length);
+		ft_strlcat(tmp, "0x", 3);
 		if (length > (int)ft_strlen(f->str))
 		{
-			ft_strfill(tmp, '0', 0, length - ft_strlen(f->str));
-			ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str));
+			ft_strfill(tmp, '0', size, length - ft_strlen(f->str));
+			ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str) + 1);
 		}
 		else
-			tmp = f->str;
+			ft_strlcat(tmp + size, f->str, ft_strlen(f->str) + 1);
 	}
 	f->str = tmp;
 	// ft_strdel(&tmp);
@@ -471,7 +478,6 @@ void	printoctal(f_flags **flags)
 	f_flags *f;
 	char 	*tmp;
 	int 	length;
-	int 	size;
 
 	f = *flags;
 	length = ft_strlen(f->str);
@@ -479,17 +485,15 @@ void	printoctal(f_flags **flags)
 		length = f->precision;
 	else if (f->hash == 1)
 		length += 1;
-	size = length;
 	if (f->fw > length)
 	{
-		size = f->fw;
 		tmp = ft_strnew(f->fw);
 		if (f->neg == 1)
 		{
 			if ((int)ft_strlen(f->str) < length)
 			{
 				ft_strfill(tmp, '0', 0, length - ft_strlen(f->str));
-				ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str));
+				ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str) + 1);
 			}
 			else 
 				ft_strlcat(tmp, f->str, length + 1);
@@ -502,7 +506,7 @@ void	printoctal(f_flags **flags)
 			if ((int)ft_strlen(f->str) < length)
 			{
 				ft_strfill(tmp, '0', f->fw - length, f->fw - ft_strlen(f->str));
-				ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str));
+				ft_strlcat(tmp + f->fw - (int)ft_strlen(f->str), f->str, ft_strlen(f->str) + 1);
 			}
 			else 
 				ft_strlcat(tmp + f->fw - length, f->str, length + 1);
@@ -515,13 +519,12 @@ void	printoctal(f_flags **flags)
 		if (length > (int)ft_strlen(f->str))
 		{
 			ft_strfill(tmp, '0', 0, length - ft_strlen(f->str));
-			ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str));
+			ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str) + 1);
 		}
 		else
 			tmp = f->str;
 	}
 	f->str = tmp;
-	// ft_strdel(&tmp);
 }
 
 void	printun(f_flags **flags)
@@ -542,7 +545,7 @@ void	printun(f_flags **flags)
 			if ((int)ft_strlen(f->str) < length)
 			{
 				ft_strfill(tmp, '0', 0, length - ft_strlen(f->str));
-				ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str));
+				ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str) + 1);
 			}
 			else 
 				ft_strlcat(tmp, f->str, length + 1);
@@ -555,7 +558,7 @@ void	printun(f_flags **flags)
 			if ((int)ft_strlen(f->str) < length)
 			{
 				ft_strfill(tmp, '0', f->fw - length, f->fw - ft_strlen(f->str));
-				ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str));
+				ft_strlcat(tmp + length, f->str, ft_strlen(f->str) + 1);
 			}
 			else 
 				ft_strlcat(tmp + f->fw - length, f->str, length + 1);
@@ -568,7 +571,7 @@ void	printun(f_flags **flags)
 		if (length > (int)ft_strlen(f->str))
 		{
 			ft_strfill(tmp, '0', 0, length - ft_strlen(f->str));
-			ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str));
+			ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str) + 1);
 		}
 		else
 			tmp = f->str;
@@ -595,7 +598,7 @@ void	printdecimal(f_flags **flags)
 			if ((int)ft_strlen(f->str) < length)
 			{
 				ft_strfill(tmp, '0', 0, length - ft_strlen(f->str));
-				ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str));
+				ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str) + 1);
 			}
 			else 
 				ft_strlcat(tmp, f->str, length + 1);
@@ -608,7 +611,7 @@ void	printdecimal(f_flags **flags)
 			if ((int)ft_strlen(f->str) < length)
 			{
 				ft_strfill(tmp, '0', f->fw - length, f->fw - ft_strlen(f->str));
-				ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str));
+				ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str) + 1);
 			}
 			else 
 				ft_strlcat(tmp + f->fw - length, f->str, length + 1);
@@ -621,7 +624,7 @@ void	printdecimal(f_flags **flags)
 		if (length > (int)ft_strlen(f->str))
 		{
 			ft_strfill(tmp, '0', 0, length - ft_strlen(f->str));
-			ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str));
+			ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str) + 1);
 		}
 		else
 			tmp = f->str;
@@ -640,7 +643,7 @@ void 	putstrf(va_list ap, f_flags **flags)
 	printstr(&f);
 }
 
-void 	putunsigned(va_list ap, f_flags **flags, int c)
+void 	putunsigned(va_list ap, f_flags **flags)
 {
 	f_flags *f;
 
@@ -657,14 +660,58 @@ void 	putunsigned(va_list ap, f_flags **flags, int c)
 		f->str = putuintmax(ap, 10);
 	else if (f->z == 1)
 		f->str = putsizet(ap, 10);
+	else
+		f->str = putuintmax(ap, 10);
 	//call function to finalize str based on flags/fw/precision
-	if (c == 'o')
-		printoctal(&f);
-	else if (c == 'u')
-		printun(&f);
-	else if (c == 'x')
-		printhex(&f);
+	printun(&f);
 }
+
+void 	puthex(va_list ap, f_flags **flags)
+{
+	f_flags *f;
+
+	f = *flags;
+	if (f->hh == 1)
+		f->str = putunsignedchar(ap, 16);
+	else if (f->h == 1)
+		f->str = putushort(ap, 16);
+	else if (f->l == 1)
+		f->str = putulong(ap, 16);
+	else if (f->ll == 1)
+		f->str = putulonglong(ap, 16);
+	else if (f->j == 1)
+		f->str = putuintmax(ap, 16);
+	else if (f->z == 1)
+		f->str = putsizet(ap, 16);
+	else
+		f->str = putuintmax(ap, 16);
+	//call function to finalize str based on flags/fw/precision
+	printhex(&f);
+}
+
+void 	putoctal(va_list ap, f_flags **flags)
+{
+	f_flags *f;
+
+	f = *flags;
+	if (f->hh == 1)
+		f->str = putunsignedchar(ap, 8);
+	else if (f->h == 1)
+		f->str = putushort(ap, 8);
+	else if (f->l == 1)
+		f->str = putulong(ap, 8);
+	else if (f->ll == 1)
+		f->str = putulonglong(ap, 8);
+	else if (f->j == 1)
+		f->str = putuintmax(ap, 8);
+	else if (f->z == 1)
+		f->str = putsizet(ap, 8);
+	else
+		f->str = putuintmax(ap, 8);
+	//call function to finalize str based on flags/fw/precision
+	printoctal(&f);
+}
+
 
 void 	putlint(va_list ap, f_flags **flags)
 {
@@ -683,6 +730,8 @@ void 	putlint(va_list ap, f_flags **flags)
 		f->str = putintmax(ap, 10);
 	else if (f->z == 1)
 		f->str = putsizet(ap, 10);
+	else
+		f->str = putintmax(ap, 10);
 	//call function to finalize str based on flags/fw/precision
 	printdecimal(&f);
 }
@@ -739,52 +788,29 @@ void	putptr(va_list ap, f_flags **flags)
 
 void 	putform(char *s, va_list ap, f_flags **flags, int *index)
 {
-	int		i;
 	int		t;
 	f_flags *f;
 
-	i = 0;
 	t = *index;
 	f = *flags;
-	while (s[t] != g_conv[i])
-		i++;
-	if (i == 0)
+	if (s[t] == 's')
 		putstrf(ap, &f);
-	if (i == 2)
+	else if (s[t] == 'p')
 		putptr(ap, &f);
-	if (i == 3 || i == 5)
+	else if (s[t] == 'd' || s[t] == 'i')
 		putlint(ap, &f);
-	if (i == 6)
-		putunsigned(ap, &f, 'o'); //add another field for identifier
-	if (i == 8)
-		putunsigned(ap, &f, 'u'); //same
-	if (i == 10)
-		putunsigned(ap, &f, 'x'); //same
-	if (i == 12)
+	else if (s[t] == 'o')
+		putoctal(ap, &f); //add another field for identifier
+	else if (s[t] == 'u')
+		putunsigned(ap, &f); //same
+	else if (s[t] == 'x')
+		puthex(ap, &f); //same
+	else if (s[t] == 'c')
 		putuchar(ap, &f);
 	t++;
 	ft_putstrf(f->str);
-	*index = t;
-}
-
-/*
-Returns 1 if current char is a valid symbol
-*/
-int		issymbol(char *s, int *index)
-{
-	char	*str;
-	int		t;
-
-	t = *index;
-	str = s;
-	if (str[t] == '#' ||str[t] == '0' || str[t] == '-' || str[t] == ' ' 
-		|| str[t] == '+' || (str[t] == 'h' && str[t+1] == 'h') 
-		|| str[t] == 'h' || (str[t] == 'l' && str[t+1] == 'l') 
-		|| str[t] == 'l' || str[t] == 'j' || str[t] == 'z' 
-		|| str[t] == ' ' || (str[t] >= '0' && str[t] <= '9'))
-		return (1);
-	else
-		return (0);
+	f->size += (int)ft_strlen(f->str);
+	// printf("%s\n", f->str);
 	*index = t;
 }
 
@@ -802,30 +828,16 @@ void	populateflags(char *str, f_flags **flags, int *index)
 		|| str[i] == ' ')
 	{
 		if (str[i] == '#')
-		{
 			f->hash = 1;
-			i++;
-		}
 		else if (str[i] == '0')
-		{
 			f->zero = 1;
-			i++;
-		}
 		else if (str[i] == '-')
-		{
 			f->neg = 1;
-			i++;
-		}
 		else if (str[i] == ' ')
-		{
 			f->space = 1;
-			i++;
-		}
 		else if (str[i] == '+')
-		{
 			f->pos = 1;
-			i++;
-		}
+		i++;
 	}
 	*index = i;
 }
@@ -901,37 +913,47 @@ void 	populatelength(char *str, f_flags **flags, int *index)
 
 	f = *flags;
 	i = *index;
-	if (str[i] == 'h' && str[i+1] == 'h')
+	if ((str[i] == 'h' && str[i+1] == 'h') || str[i] == 'h' 
+		|| str[i] == 'l' || (str[i] == 'l' && str[i+1] == 'l') 
+		|| str[i] == 'j' || str[i] == 'z')
 	{
-		f->hh = 1;
-		i++;
-	}
-	else if (str[i] == 'h')
-	{
-		f->h = 1;
-		i++;
-	}
-	else if (str[i] == 'l')
-	{
-		f->l = 1;
-		i++;
-	}
-	else if (str[i] == 'l' && str[i+1] == 'l')
-	{
-		f->ll = 1;
-		i++;
-	}
-	else if (str[i] == 'j')
-	{
-		f->j = 1;
-		i++;
-	}
-	else if (str[i] == 'z')
-	{
-		f->z = 1;
+		if (str[i] == 'h' && str[i+1] == 'h')
+			f->hh = 1;
+		else if (str[i] == 'h')
+			f->h = 1;
+		else if (str[i] == 'l')
+			f->l = 1;
+		else if (str[i] == 'l' && str[i+1] == 'l')
+			f->ll = 1;
+		else if (str[i] == 'j')
+			f->j = 1;
+		else if (str[i] == 'z')
+			f->z = 1;
 		i++;
 	}
 	*index = i;
+}
+
+/*
+Returns 1 if current char is a valid symbol
+*/
+int		issymbol(char *s, int *index)
+{
+	char	*str;
+	int		t;
+
+	t = *index;
+	str = s;
+	if (str[t] == '#' ||str[t] == '0' || str[t] == '-' || str[t] == ' ' 
+		|| str[t] == '+' || (str[t] == 'h' && str[t+1] == 'h') 
+		|| str[t] == 'h' || (str[t] == 'l' && str[t+1] == 'l') 
+		|| str[t] == 'l' || str[t] == 'j' || str[t] == 'z' 
+		|| str[t] == ' ' || (str[t] >= '0' && str[t] <= '9')
+		|| str[t] == '.')
+		return (1);
+	else
+		return (0);
+	*index = t;
 }
 
 void		checksymbols(char *s, f_flags **flags, int *index)
@@ -986,7 +1008,7 @@ void	setflags(f_flags **flags)
 	f->z = 0;
 	f->length = 0;
 	f->str = "";
-	f->specifier = 0;
+	f->size = 0;
 }
 
 int		ft_printf(const char *format, ...)
@@ -996,9 +1018,6 @@ int		ft_printf(const char *format, ...)
 	va_list ap;
 	f_flags	*flags;
 
-	// if ((flags = malloc(sizeof(f_flags))) == 0)
-	// 	return (0);
-	// flags->str = (char*)malloc(sizeof(char*));
 	flags = malloc(sizeof(f_flags));
 	s = (char *)format;
 	va_start(ap, format);
@@ -1023,20 +1042,19 @@ int		ft_printf(const char *format, ...)
 		else
 			ft_putcharf(s[index++]);
 	}
-	// free(flags->str);
-	// free(&flags);
 	va_end(ap);
-	return (0);
+	return (flags->size);
 }
 
-int 	main(void)
-{
-	ft_printf("abcd%o\n", 20);
-	//ft_printf("%s\n", "abcd\0");
-	//ft_printf("%s\n", "abcd\n");
+// int 	main(void)
+// {
+// 	ft_printf("%#5.4x\n", 20);
+// 	printf("%#6.4x\n", 20);
+// 	// ft_printf("%s\n", "abcd\0");
+// 	// ft_printf("%s\n", "abcd\n");
 
-	return(0);
-}
+// 	return(0);
+// }
 /*
 populate flags/fw/precision/length/
 itoabase

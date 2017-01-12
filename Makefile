@@ -1,12 +1,12 @@
 NAME = libftprintf.a
 
-CC = gcc
-
-CFLAGS = -c -Wall -Werror -Wextra
+GCCFLAGS = gcc -c -Wall -Werror -Wextra
 
 LIB = ar rc
 
 RLIB = ranlib
+
+HEADER_DIR = -I fprintf.h
 
 SRCP =
 SRCP += printf.c
@@ -212,18 +212,18 @@ OBJL += ft_toupper.o
 #OBJ = $(SRC:.c=.o)
 OBJP = $(SRCP:.c=.o)
 
-all: 	$(NAME)
+all: $(NAME)
 
 $(NAME):
-			@$(CC) $(CFLAGS) $(SRCP) $(SRC)
-			@$(LIB) $(NAME) $(OBJP) $(OBJL)
-			@$(RLIB) $(NAME)
+		$(GCCFLAGS) $(HEADER_DIR) $(SRCP) #$(SRC)
+		$(LIB) $(NAME) $(OBJP) #$(OBJL)
+		$(RLIB) $(NAME)
 
 clean:
-			@/bin/rm -f *.o
+		/bin/rm -f *.o
 
 fclean: clean
-			@/bin/rm -f $(NAME)
+		/bin/rm -f $(NAME)
 
 re: fclean all
 
