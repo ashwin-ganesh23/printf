@@ -209,19 +209,19 @@ OBJL += ft_tolower.o
 OBJL += ft_toupper.o
 
 
-#OBJ = $(SRC:.c=.o)
+OBJ = $(SRC:.c=.o)
 OBJP = $(SRCP:.c=.o)
 OBJSP = ft_printf.o
 
 all: $(NAME)
 
 $(NAME):
-		@$(GCCFLAGS) $(HEADER_DIR) $(SRCP)
-		@$(LIB) $(NAME) $(OBJP)
+		$(GCCFLAGS) $(HEADER_DIR) $(SRCP)
+		$(LIB) $(NAME) $(OBJP)
 		@$(RLIB) $(NAME)
 
 clean:
-		rm -f *.o
+		rm -f $(OBJ) $(OBJL) $(OBJP)
 
 fclean: clean
 		rm -f $(NAME)

@@ -1035,30 +1035,32 @@ int		ft_printf(const char *format, ...)
 			else
 			{
 				//put undefined char to str
-				ft_putcharf(s[index++]);
 				flags->size += 1;
+				printf("%d\n", flags->size);
+				ft_putcharf(s[index++]);
 			}
 			setflags(&flags);
 		}
 		else
 		{
-			ft_putcharf(s[index++]);
 			flags->size += 1;
+			ft_putcharf(s[index++]);
 		}
 	}
 	va_end(ap);
 	return (flags->size);
 }
 
-// int 	main(void)
-// {
-// 	ft_printf("%#5.4x\n", 20);
-// 	printf("%#6.4x\n", 20);
-// 	// ft_printf("%s\n", "abcd\0");
-// 	// ft_printf("%s\n", "abcd\n");
+int 	main(void)
+{
+	ft_printf("%%");
+	// ft_printf("%#5.4x\n", 20);
+	// printf("%#6.4x\n", 20);
+	// ft_printf("%s\n", "abcd\0");
+	// ft_printf("%s\n", "abcd\n");
 
-// 	return(0);
-// }
+	return(0);
+}
 /*
 populate flags/fw/precision/length/
 itoabase
