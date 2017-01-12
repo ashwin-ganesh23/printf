@@ -215,15 +215,15 @@ OBJP = $(SRCP:.c=.o)
 all: $(NAME)
 
 $(NAME):
-		$(GCCFLAGS) $(HEADER_DIR) $(SRCP)
-		$(LIB) $(NAME) $(OBJP)
-		$(RLIB) $(NAME)
+		@$(GCCFLAGS) $(HEADER_DIR) $(SRCP)
+		@$(LIB) $(NAME) $(OBJP)
+		@$(RLIB) $(NAME)
 
 clean:
-		/bin/rm -f *.o
+		@/bin/rm -f *.o
 
 fclean: clean
-		/bin/rm -f $(NAME)
+		@/bin/rm -f $(NAME)
 
 re: fclean all
 
