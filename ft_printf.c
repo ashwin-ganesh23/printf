@@ -358,60 +358,6 @@ char	*putsizet(va_list ap, int base)
 	return (itoa_base_upper(s, base));
 }
 
-void	printstr(f_flags **flags)
-{
-	f_flags *f;
-	int length;
-	char *tmp;
-
-	f = *flags;
-	length = ft_strlen(f->str);
-	if (f->precision > length)
-		length = f->precision;
-	if (f->fw > length)
-	{
-		tmp = ft_strnew(f->fw);
-		if (f->neg == 1)
-		{
-			ft_strlcat(tmp, f->str, length);
-			ft_strfill(tmp, ' ', length-1, f->fw);
-			tmp[f->fw] = '\0';
-		}
-		else if (f->zero == 1)
-		{
-			ft_strlcat(tmp + (f->fw - length), f->str, length);
-			ft_strfill(tmp, '0', 0, f->fw - length);
-		}
-		else
-		{
-			ft_strlcat(tmp + (f->fw - length), f->str, length);
-			ft_strfill(tmp, ' ', 0, f->fw - length);
-		}
-	}
-	else
-	{
-		tmp = ft_strnew(length);
-		if (f->neg == 1)
-		{
-			ft_strlcat(tmp, f->str, length);
-			ft_strfill(tmp, ' ', length-1, f->fw);
-			tmp[f->fw] = '\0';
-		}
-		else if (f->zero == 1)
-		{
-			ft_strlcat(tmp + (f->fw - length), f->str, length + 1);
-			ft_strfill(tmp, '0', 0, f->fw - length);
-		}
-		else
-		{
-			ft_strlcat(tmp + (f->fw - length), f->str, length);
-			ft_strfill(tmp, ' ', 0, f->fw - length);
-		}
-	}
-	f->str = tmp;
-	// ft_strdel(&tmp); 
-}
-
 void	printhex(f_flags **flags)
 {
 	f_flags *f;
@@ -633,6 +579,60 @@ void	printdecimal(f_flags **flags)
 	// ft_strdel(&tmp);
 }
 
+void	printstr(f_flags **flags)
+{
+	f_flags *f;
+	int length;
+	char *tmp;
+
+	f = *flags;
+	length = ft_strlen(f->str);
+	if (f->precision > length)
+		length = f->precision;
+	if (f->fw > length)
+	{
+		tmp = ft_strnew(f->fw);
+		if (f->neg == 1)
+		{
+			ft_strlcat(tmp, f->str, length + 1);
+			ft_strfill(tmp, ' ', length-1, f->fw);
+			tmp[f->fw] = '\0';
+		}
+		else if (f->zero == 1)
+		{
+			ft_strlcat(tmp + (f->fw - length), f->str, length + 1);
+			ft_strfill(tmp, '0', 0, f->fw - length);
+		}
+		else
+		{
+			ft_strlcat(tmp + (f->fw - length), f->str, length + 1);
+			ft_strfill(tmp, ' ', 0, f->fw - length);
+		}
+	}
+	else
+	{
+		tmp = ft_strnew(length);
+		if (f->neg == 1)
+		{
+			ft_strlcat(tmp, f->str, length + 1);
+			ft_strfill(tmp, ' ', length-1, f->fw);
+			tmp[f->fw] = '\0';
+		}
+		else if (f->zero == 1)
+		{
+			ft_strlcat(tmp + (f->fw - length), f->str, length + 1);
+			ft_strfill(tmp, '0', 0, f->fw - length);
+		}
+		else
+		{
+			ft_strlcat(tmp + (f->fw - length), f->str, length + 1);
+			ft_strfill(tmp, ' ', 0, f->fw - length);
+		}
+	}
+	f->str = tmp;
+	// ft_strdel(&tmp); 
+}
+
 void 	putstrf(va_list ap, f_flags **flags)
 {
 	f_flags *f;
@@ -736,32 +736,16 @@ void 	putlint(va_list ap, f_flags **flags)
 	printdecimal(&f);
 }
 
-void	printchar(f_flags **flags)
+void	putspaces(int size)
 {
-	f_flags *f;
-	int 	length;
-	char 	*tmp;
+	int i;
 
-	f = *flags;
-	length = (int)ft_strlen(f->str);
-	if (f->fw > length)
+	i = 0;
+	while (i < size)
 	{
-		tmp = ft_strnew(f->fw);
-		if (f->neg == 1)
-		{
-			tmp[0] = f->str[0];
-			ft_strfill(tmp, ' ', 1, f->fw);
-			tmp[f->fw] = '\0';
-		}
-		else
-		{
-			ft_strfill(tmp, ' ', 0, f->fw - 1);
-			tmp[f->fw - 1] = f->str[0];
-			tmp[f->fw] = '\0';
-		}
-		f->str = tmp;
+		ft_putcharf(' ');
+		i++;
 	}
-	ft_strdel(&tmp);
 }
 
 void 	putuchar(va_list ap, f_flags **flags)
@@ -770,10 +754,24 @@ void 	putuchar(va_list ap, f_flags **flags)
 	int 		c;
 
 	f = *flags;
-	c = va_arg(ap, int);
-	//call function to finalize str based on flags/fw/precision
-	f->str[0] = c;
-	printchar(flags);
+	c = (unsigned char)va_arg(ap, int);
+	f->size += 1;
+	if (f->fw > 1)
+	{
+		f->size += f->fw - 1;
+		if (f->neg == 1)
+		{
+			ft_putcharf(c);
+			putspaces(f->fw - 1);
+		}
+		else
+		{
+			putspaces(f->fw - 1);
+			ft_putcharf(c);
+		}
+	}
+	else
+		ft_putcharf(c);
 }
 
 void	putptr(va_list ap, f_flags **flags)
@@ -810,7 +808,6 @@ void 	putform(char *s, va_list ap, f_flags **flags, int *index)
 	t++;
 	ft_putstrf(f->str);
 	f->size += (int)ft_strlen(f->str);
-	// printf("%s\n", f->str);
 	*index = t;
 }
 
@@ -1008,7 +1005,6 @@ void	setflags(f_flags **flags)
 	f->z = 0;
 	f->length = 0;
 	f->str = "";
-	f->size = 0;
 }
 
 int		ft_printf(const char *format, ...)
@@ -1022,6 +1018,7 @@ int		ft_printf(const char *format, ...)
 	s = (char *)format;
 	va_start(ap, format);
 	setflags(&flags);
+	flags->size = 0;
 	index = 0;
 	while (s[index])
 	{
@@ -1047,12 +1044,16 @@ int		ft_printf(const char *format, ...)
 		}
 	}
 	va_end(ap);
-	return (flags->size);
+	index = flags->size;
+	free(flags);
+	return (index);
 }
 
 // int 	main(void)
 // {
-// 	ft_printf("%%");
+// 	char *c = "abcd";
+// 	printf("%d\n", printf("%5s\n", c));
+// 	printf("%d\n", ft_printf("%5s\n", c));
 // 	// ft_printf("%#5.4x\n", 20);
 // 	// printf("%#6.4x\n", 20);
 // 	// ft_printf("%s\n", "abcd\0");
