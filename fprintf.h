@@ -38,8 +38,6 @@ typedef struct 	t_flags
 	int		size;
 }				f_flags;
 
-extern void (*conv_id[14])(va_list ap, f_flags ff);
-
 char	*g_conv = "sSpdDioOuUxXcC";
 
 void	ft_strdel(char **as);
@@ -50,37 +48,40 @@ char	*ft_strnew(size_t size);
 void	*ft_memset(void *b, int c, size_t len);
 char	*ft_strcpy(char *dst, const char *src);
 char	*ft_strdup(const char *s1);
+void	putspaces(int size);
+void	putzeros(int size);
 
 char	*ft_strfill(char *str, char c, int start, int end);
 void 	ft_putcharf(char c);
 void 	ft_putstrf(char *str);
 int		find_digits(ssize_t value, int base);
 char 	*itoa_base_upper(ssize_t value, int base);
-char 	*itoa_base_lower(ssize_t value, int base);
+char 	*itoa_base(ssize_t value, int base, int ucase);
 char 	*itoa_base_unsigned(ssize_t value, int base);
-char	*putsignedchar(va_list ap, int base);
-char	*putshort(va_list ap, int base);
-char	*putlong(va_list ap, int base);
-char	*putlonglong(va_list ap, int base);
-char	*putintmax(va_list ap, int base);
-char	*putunsignedchar(va_list ap, int base);
-char	*putushort(va_list ap, int base);
-char	*putulong(va_list ap, int base);
-char	*putulonglong(va_list ap, int base);
-char	*putuintmax(va_list ap, int base);
-char	*putsizet(va_list ap, int base);
+char	*putsignedchar(va_list ap, int base, int ucase);
+char	*putshort(va_list ap, int base, int ucase);
+char	*putlong(va_list ap, int base, int ucase);
+char	*putlonglong(va_list ap, int base, int ucase);
+char	*putintmax(va_list ap, int base, int ucase);
+char	*putunsignedchar(va_list ap, int base, int ucase);
+char	*putushort(va_list ap, int base, int ucase);
+char	*putulong(va_list ap, int base, int ucase);
+char	*putulonglong(va_list ap, int base, int ucase);
+char	*putuintmax(va_list ap, int base, int ucase);
+char	*putsizet(va_list ap, int base, int ucase);
 
 void	printstr(f_flags **flags);
 void	printoctal(f_flags **flags);
 void	printhex(f_flags **flags);
 void	printun(f_flags **flags);
-void	printchar(f_flags **flags);
 void	printdecimal(f_flags **flags);
+
+void	putrandchar(char *s, f_flags **flags, int *index);
 
 void 	putstrf(va_list ap, f_flags **flags);
 void	putptr(va_list ap, f_flags **flags);
 void 	putunsigned(va_list ap, f_flags **flags);
-void 	puthex(va_list ap, f_flags **flags);
+void 	puthex(va_list ap, f_flags **flags, int ucase);
 void 	putoctal(va_list ap, f_flags **flags);
 void 	putlint(va_list ap, f_flags **flags);
 

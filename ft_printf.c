@@ -30,6 +30,30 @@
 // 	&putcharf,	//13
 // };
 
+void	putspaces(int size)
+{
+	int i;
+
+	i = 0;
+	while (i < size)
+	{
+		ft_putcharf(' ');
+		i++;
+	}
+}
+
+void	putzeros(int size)
+{
+	int 	i;
+
+	i = 0;
+	while (i < size)
+	{
+		ft_putcharf('0');
+		i++;
+	}
+}
+
 void	ft_strdel(char **as)
 {
 	if (as != NULL)
@@ -221,13 +245,19 @@ char *itoa_base_upper(ssize_t value, int base)
 	return (str);
 }
 
-char *itoa_base_lower(ssize_t value, int base)
+char *itoa_base(ssize_t value, int base, int ucase)
 {
 	intmax_t	max;
 	int			size;
-	char		bases[16] = "0123456789abcdef";
+	char		lbases[16] = "0123456789abcdef";
+	char		ubases[16] = "0123456789ABCDEF";
+	char 		*bases;
 	char		*str;
 
+	if (ucase == 1)
+		bases = ubases;
+	else
+		bases = lbases;
 	max = (intmax_t)value;
 	if (value == 0)
 		return ("0");
@@ -271,151 +301,149 @@ char *itoa_base_unsigned(ssize_t value, int base)
 	return (str);
 }
 
-char	*putsignedchar(va_list ap, int base)
+char	*putsignedchar(va_list ap, int base, int ucase)
 {
 	signed char	c;
 
 	c = (signed char)va_arg(ap, void *);
-	return (itoa_base_upper(c, base));
+	return (itoa_base(c, base, ucase));
 }
 
-char	*putshort(va_list ap, int base)
+char	*putshort(va_list ap, int base, int ucase)
 {
 	short 		c;
 
 	c = (short)va_arg(ap, void *);
-	return (itoa_base_upper(c, base));
+	return (itoa_base(c, base, ucase));
 }
 
-char	*putlong(va_list ap, int base)
+char	*putlong(va_list ap, int base, int ucase)
 {
 	long		l;
 
 	l = (long)va_arg(ap, void *);
-	return (itoa_base_upper(l, base));
+	return (itoa_base(l, base, ucase));
 }
 
-char	*putlonglong(va_list ap, int base)
+char	*putlonglong(va_list ap, int base, int ucase)
 {
 	long long	ll;
 
 	ll = va_arg(ap, long long);
-	return (itoa_base_upper(ll, base));
+	return (itoa_base(ll, base, ucase));
 }
 
-char	*putintmax(va_list ap, int base)
+char	*putintmax(va_list ap, int base, int ucase)
 {
 	intmax_t	m;
 
 	m = va_arg(ap, intmax_t);
-	return (itoa_base_upper(m, base));
+	return (itoa_base(m, base, ucase));
 }
 
-char	*putunsignedchar(va_list ap, int base)
+char	*putunsignedchar(va_list ap, int base, int ucase)
 {
 	unsigned char c;
 
 	c = (unsigned char)va_arg(ap, void *);
-	return (itoa_base_upper(c, base));
+	return (itoa_base(c, base, ucase));
 }
 
-char	*putushort(va_list ap, int base)
+char	*putushort(va_list ap, int base, int ucase)
 {
 	unsigned short sh;
 
 	sh = (unsigned short)va_arg(ap, void *);
-	return (itoa_base_upper(sh, base));
+	return (itoa_base(sh, base, ucase));
 }
 
-char	*putulong(va_list ap, int base)
+char	*putulong(va_list ap, int base, int ucase)
 {
 	unsigned long l;
 
 	l = va_arg(ap, unsigned long);
-	return (itoa_base_upper(l, base));
+	return (itoa_base(l, base, ucase));
 }
 
-char	*putulonglong(va_list ap, int base)
+char	*putulonglong(va_list ap, int base, int ucase)
 {
 	unsigned long long ll;
 	ll = va_arg(ap, unsigned long long);
-	return (itoa_base_upper(ll, base));
+	return (itoa_base(ll, base, ucase));
 }
 
-char	*putuintmax(va_list ap, int base)
+char	*putuintmax(va_list ap, int base, int ucase)
 {
 	uintmax_t m;
 
 	m = va_arg(ap, uintmax_t);
-	return (itoa_base_upper(m, base));
+	return (itoa_base(m, base, ucase));
 }
 
-char	*putsizet(va_list ap, int base)
+char	*putsizet(va_list ap, int base, int ucase)
 {
 	size_t		s;
 
 	s = va_arg(ap, size_t);
-	return (itoa_base_upper(s, base));
+	return (itoa_base(s, base, ucase));
 }
 
 void	printhex(f_flags **flags)
 {
 	f_flags *f;
-	char *tmp;
 	int length;
-	int size;
 
 	f = *flags;
-	size = 0;
 	length = ft_strlen(f->str);
 	if (f->precision > length)
 		length = f->precision;
 	if (f->hash == 1)
-		size = 2;
-	length += size;
+		length += 2;
 	if (f->fw > length)
 	{
-		tmp = ft_strnew(f->fw);
-		ft_strlcat(tmp, "0x", 3);
 		if (f->neg == 1)
 		{
+			if (f->hash == 1)
+				ft_putstrf("0x");
 			if ((int)ft_strlen(f->str) < length)
 			{
-				ft_strfill(tmp, '0', size, length - ft_strlen(f->str));
-				ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str) + 1);
+				putzeros(f->precision - ft_strlen(f->str));
+				ft_putstrf(f->str);
 			}
 			else 
-				ft_strlcat(tmp + size, f->str, length + 1);
-			ft_strfill(tmp, ' ', length, f->fw);
-			tmp[f->fw] = '\0';
+				ft_putstrf(f->str);
+			putspaces(f->fw - length);
 		}
 		else
 		{
-			ft_strfill(tmp, ' ', size, f->fw - length);
+			putspaces(f->fw - length);
+			if (f->hash == 1)
+				ft_putstrf("0x");			
 			if ((int)ft_strlen(f->str) < length)
 			{
-				ft_strfill(tmp, '0', f->fw - length, f->fw - ft_strlen(f->str));
-				ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str) + 1);
+				putzeros(f->precision - ft_strlen(f->str));
+				ft_putstrf(f->str);
 			}
 			else 
-				ft_strlcat(tmp + f->fw - length, f->str, length + 1);
-			tmp[f->fw] = '\0';
+				ft_putstrf(f->str);	
 		}
+		f->str = "";
+		f->size += f->fw;
 	}
 	else
 	{
-		tmp = ft_strnew(length);
-		ft_strlcat(tmp, "0x", 3);
+		if (f->hash == 1)
+			ft_putstrf("0x");
 		if (length > (int)ft_strlen(f->str))
 		{
-			ft_strfill(tmp, '0', size, length - ft_strlen(f->str));
-			ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str) + 1);
+			putzeros(length - ft_strlen(f->str) - (f->hash * 2));
+			ft_putstrf(f->str);
 		}
 		else
-			ft_strlcat(tmp + size, f->str, ft_strlen(f->str) + 1);
+			ft_putstrf(f->str);
+		f->str = "";
+		f->size += length;
 	}
-	f->str = tmp;
-	// ft_strdel(&tmp);
 }
 
 
@@ -649,42 +677,42 @@ void 	putunsigned(va_list ap, f_flags **flags)
 
 	f = *flags;
 	if (f->hh == 1)
-		f->str = putunsignedchar(ap, 10);
+		f->str = putunsignedchar(ap, 10, 0);
 	else if (f->h == 1)
-		f->str = putushort(ap, 10);
+		f->str = putushort(ap, 10, 0);
 	else if (f->l == 1)
-		f->str = putulong(ap, 10);
+		f->str = putulong(ap, 10, 0);
 	else if (f->ll == 1)
-		f->str = putulonglong(ap, 10);
+		f->str = putulonglong(ap, 10, 0);
 	else if (f->j == 1)
-		f->str = putuintmax(ap, 10);
+		f->str = putuintmax(ap, 10, 0);
 	else if (f->z == 1)
-		f->str = putsizet(ap, 10);
+		f->str = putsizet(ap, 10, 0);
 	else
-		f->str = putuintmax(ap, 10);
+		f->str = putuintmax(ap, 10, 0);
 	//call function to finalize str based on flags/fw/precision
 	printun(&f);
 }
 
-void 	puthex(va_list ap, f_flags **flags)
+void 	puthex(va_list ap, f_flags **flags, int ucase)
 {
 	f_flags *f;
 
 	f = *flags;
 	if (f->hh == 1)
-		f->str = putunsignedchar(ap, 16);
+		f->str = putunsignedchar(ap, 16, ucase);
 	else if (f->h == 1)
-		f->str = putushort(ap, 16);
+		f->str = putushort(ap, 16, ucase);
 	else if (f->l == 1)
-		f->str = putulong(ap, 16);
+		f->str = putulong(ap, 16, ucase);
 	else if (f->ll == 1)
-		f->str = putulonglong(ap, 16);
+		f->str = putulonglong(ap, 16, ucase);
 	else if (f->j == 1)
-		f->str = putuintmax(ap, 16);
+		f->str = putuintmax(ap, 16, ucase);
 	else if (f->z == 1)
-		f->str = putsizet(ap, 16);
+		f->str = putsizet(ap, 16, ucase);
 	else
-		f->str = putuintmax(ap, 16);
+		f->str = putuintmax(ap, 16, ucase);
 	//call function to finalize str based on flags/fw/precision
 	printhex(&f);
 }
@@ -695,19 +723,19 @@ void 	putoctal(va_list ap, f_flags **flags)
 
 	f = *flags;
 	if (f->hh == 1)
-		f->str = putunsignedchar(ap, 8);
+		f->str = putunsignedchar(ap, 8, 0);
 	else if (f->h == 1)
-		f->str = putushort(ap, 8);
+		f->str = putushort(ap, 8, 0);
 	else if (f->l == 1)
-		f->str = putulong(ap, 8);
+		f->str = putulong(ap, 8, 0);
 	else if (f->ll == 1)
-		f->str = putulonglong(ap, 8);
+		f->str = putulonglong(ap, 8, 0);
 	else if (f->j == 1)
-		f->str = putuintmax(ap, 8);
+		f->str = putuintmax(ap, 8, 0);
 	else if (f->z == 1)
-		f->str = putsizet(ap, 8);
+		f->str = putsizet(ap, 8, 0);
 	else
-		f->str = putuintmax(ap, 8);
+		f->str = putuintmax(ap, 8, 0);
 	//call function to finalize str based on flags/fw/precision
 	printoctal(&f);
 }
@@ -719,33 +747,21 @@ void 	putlint(va_list ap, f_flags **flags)
 
 	f = *flags;
 	if (f->hh == 1)
-		f->str = putsignedchar(ap, 10);
+		f->str = putsignedchar(ap, 10, 0);
 	else if (f->h == 1)
-		f->str = putshort(ap, 10);
+		f->str = putshort(ap, 10, 0);
 	else if (f->l == 1)
-		f->str = putlong(ap, 10);
+		f->str = putlong(ap, 10, 0);
 	else if (f->ll == 1)
-		f->str = putlonglong(ap, 10);
+		f->str = putlonglong(ap, 10, 0);
 	else if (f->j == 1)
-		f->str = putintmax(ap, 10);
+		f->str = putintmax(ap, 10, 0);
 	else if (f->z == 1)
-		f->str = putsizet(ap, 10);
+		f->str = putsizet(ap, 10, 0);
 	else
-		f->str = putintmax(ap, 10);
+		f->str = putintmax(ap, 10, 0);
 	//call function to finalize str based on flags/fw/precision
 	printdecimal(&f);
-}
-
-void	putspaces(int size)
-{
-	int i;
-
-	i = 0;
-	while (i < size)
-	{
-		ft_putcharf(' ');
-		i++;
-	}
 }
 
 void 	putuchar(va_list ap, f_flags **flags)
@@ -781,7 +797,7 @@ void	putptr(va_list ap, f_flags **flags)
 
 	f = *flags;
 	ptr = va_arg(ap, void*);
-	f->str = ft_strjoin("0x", itoa_base_lower((uintmax_t)ptr, 16));
+	f->str = ft_strjoin("0x", itoa_base((uintmax_t)ptr, 16, 1));
 }
 
 void 	putform(char *s, va_list ap, f_flags **flags, int *index)
@@ -802,7 +818,9 @@ void 	putform(char *s, va_list ap, f_flags **flags, int *index)
 	else if (s[t] == 'u')
 		putunsigned(ap, &f); //same
 	else if (s[t] == 'x')
-		puthex(ap, &f); //same
+		puthex(ap, &f, 0); //same
+	else if (s[t] == 'X')
+		puthex(ap, &f, 1);
 	else if (s[t] == 'c')
 		putuchar(ap, &f);
 	t++;
@@ -936,17 +954,17 @@ Returns 1 if current char is a valid symbol
 */
 int		issymbol(char *s, int *index)
 {
-	char	*str;
+	// char	*str;
 	int		t;
 
 	t = *index;
-	str = s;
-	if (str[t] == '#' ||str[t] == '0' || str[t] == '-' || str[t] == ' ' 
-		|| str[t] == '+' || (str[t] == 'h' && str[t+1] == 'h') 
-		|| str[t] == 'h' || (str[t] == 'l' && str[t+1] == 'l') 
-		|| str[t] == 'l' || str[t] == 'j' || str[t] == 'z' 
-		|| str[t] == ' ' || (str[t] >= '0' && str[t] <= '9')
-		|| str[t] == '.')
+	// str = s;
+	if (s[t] == '#' ||s[t] == '0' || s[t] == '-' || s[t] == ' ' 
+		|| s[t] == '+' || (s[t] == 'h' && s[t+1] == 'h') 
+		|| s[t] == 'h' || (s[t] == 'l' && s[t+1] == 'l') 
+		|| s[t] == 'l' || s[t] == 'j' || s[t] == 'z' 
+		|| s[t] == ' ' || (s[t] >= '0' && s[t] <= '9')
+		|| s[t] == '.')
 		return (1);
 	else
 		return (0);
@@ -1007,6 +1025,35 @@ void	setflags(f_flags **flags)
 	f->str = "";
 }
 
+void	putrandchar(char *s, f_flags **flags, int *index)
+{
+	f_flags *f;
+	int 	i;
+
+	i = *index;
+	f = *flags;
+	if (f->fw > 1)
+	{
+		f->size += f->fw;
+		if (f->neg == 0)
+		{
+			putspaces(f->fw - 1);
+			ft_putcharf(s[i++]);
+		}
+		else if (f->neg == 1)
+		{
+			ft_putcharf(s[i++]);
+			putspaces(f->fw - 1);
+		}
+	}
+	else
+	{
+		ft_putcharf(s[i++]);
+		f->size += 1;
+	}
+	*index = i;
+}
+
 int		ft_printf(const char *format, ...)
 {
 	char 	*s;
@@ -1031,9 +1078,7 @@ int		ft_printf(const char *format, ...)
 				putform(s, ap, &flags, &index);
 			else
 			{
-				//put undefined char to str
-				flags->size += 1;
-				ft_putcharf(s[index++]);
+				putrandchar(s, &flags, &index);
 			}
 			setflags(&flags);
 		}
@@ -1051,9 +1096,19 @@ int		ft_printf(const char *format, ...)
 
 // int 	main(void)
 // {
-// 	char *c = "abcd";
-// 	printf("%d\n", printf("%5s\n", c));
-// 	printf("%d\n", ft_printf("%5s\n", c));
+// 	int c = 20;
+// 	// printf("%d\n", printf("%x\n", c));
+// 	// printf("%d\n", ft_printf("%x\n", c));
+
+// 	// printf("%d\n", printf("%#x\n", c));
+// 	// printf("%d\n", ft_printf("%#x\n", c));
+
+// 	printf("%d\n", printf("%#8.5x\n", c));
+// 	printf("%d\n", ft_printf("%#8.5x\n", c));
+
+// 	printf("%d\n", printf("%9.5x\n", c));
+// 	printf("%d\n", ft_printf("%9.5x\n", c));
+
 // 	// ft_printf("%#5.4x\n", 20);
 // 	// printf("%#6.4x\n", 20);
 // 	// ft_printf("%s\n", "abcd\0");
