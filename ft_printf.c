@@ -909,7 +909,7 @@ void 	putform(char *s, va_list ap, f_flags **flags, int *index)
 
 	t = *index;
 	f = *flags;
-	if (s[t] == 's')
+	if (s[t] == 's' || s[t] == 'S')
 		putstrf(ap, &f);
 	else if (s[t] == 'p')
 		putptr(ap, &f);
@@ -923,7 +923,7 @@ void 	putform(char *s, va_list ap, f_flags **flags, int *index)
 		puthex(ap, &f, 0); //same
 	else if (s[t] == 'X')
 		puthex(ap, &f, 1);
-	else if (s[t] == 'c')
+	else if (s[t] == 'c' || s[t] == 'C')
 		putuchar(ap, &f);
 	t++;
 	ft_putstrf(f->str);
