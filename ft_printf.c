@@ -1197,28 +1197,28 @@ int		ft_printf(const char *format, ...)
 	return (index);
 }
 
-int 	main(void)
-{
-	int c = -1;
-	// printf("%d\n", printf("%x\n", c));
-	// printf("%d\n", ft_printf("%x\n", c));
+// int 	main(void)
+// {
+// 	int c = -1;
+// 	// printf("%d\n", printf("%x\n", c));
+// 	// printf("%d\n", ft_printf("%x\n", c));
 
-	// printf("%d\n", printf("%#x\n", c));
-	// printf("%d\n", ft_printf("%#x\n", c));
+// 	// printf("%d\n", printf("%#x\n", c));
+// 	// printf("%d\n", ft_printf("%#x\n", c));
 
-	printf("%d\n", printf("%d\n", c));
-	printf("%d\n", ft_printf("%d\n", c));
+// 	printf("%d\n", printf("%d\n", c));
+// 	printf("%d\n", ft_printf("%d\n", c));
 
-	// printf("%d\n", printf("%9.5x\n", c));
-	// printf("%d\n", ft_printf("%9.5x\n", c));
+// 	// printf("%d\n", printf("%9.5x\n", c));
+// 	// printf("%d\n", ft_printf("%9.5x\n", c));
 
-	// ft_printf("%#5.4x\n", 20);
-	// printf("%#6.4x\n", 20);
-	// ft_printf("%s\n", "abcd\0");
-	// ft_printf("%s\n", "abcd\n");
+// 	// ft_printf("%#5.4x\n", 20);
+// 	// printf("%#6.4x\n", 20);
+// 	// ft_printf("%s\n", "abcd\0");
+// 	// ft_printf("%s\n", "abcd\n");
 
-	return(0);
-}
+// 	return(0);
+// }
 /*
 populate flags/fw/precision/length/
 itoabase
