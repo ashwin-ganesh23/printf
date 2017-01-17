@@ -40,6 +40,7 @@ typedef struct 	t_flags
 
 char	*g_conv = "sSpdDioOuUxXcC";
 
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	ft_strdel(char **as);
 char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
@@ -60,6 +61,7 @@ char 	*itoa_base(ssize_t value, int base, int ucase);
 char 	*itoa_base_unsigned(ssize_t value, int base);
 char	*putsignedchar(va_list ap, int base, int ucase);
 char	*putshort(va_list ap, int base, int ucase);
+char 	*putint(va_list ap, int base, int ucase);
 char	*putlong(va_list ap, int base, int ucase);
 char	*putlonglong(va_list ap, int base, int ucase);
 char	*putintmax(va_list ap, int base, int ucase);
@@ -72,7 +74,7 @@ char	*putsizet(va_list ap, int base, int ucase);
 
 void	printstr(f_flags **flags);
 void	printoctal(f_flags **flags);
-void	printhex(f_flags **flags);
+void	printhex(f_flags **flags, int ucase);
 void	printun(f_flags **flags);
 void	printdecimal(f_flags **flags);
 
