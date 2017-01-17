@@ -385,7 +385,7 @@ char	*putlonglong(va_list ap, int base, int ucase)
 {
 	long long	ll;
 
-	ll = va_arg(ap, long long);
+	ll = (long long)va_arg(ap, void *);
 	return (itoa_base_signed(ll, base, ucase));
 }
 
@@ -393,7 +393,7 @@ char	*putintmax(va_list ap, int base, int ucase)
 {
 	intmax_t	m;
 
-	m = va_arg(ap, intmax_t);
+	m = (intmax_t)va_arg(ap, void *);
 	return (itoa_base_signed(m, base, ucase));
 }
 
@@ -417,14 +417,15 @@ char	*putulong(va_list ap, int base, int ucase)
 {
 	unsigned long l;
 
-	l = va_arg(ap, unsigned long);
+	l = (unsigned long)va_arg(ap, void *);
 	return (itoa_base(l, base, ucase));
 }
 
 char	*putulonglong(va_list ap, int base, int ucase)
 {
 	unsigned long long ll;
-	ll = va_arg(ap, unsigned long long);
+
+	ll = (unsigned long long)va_arg(ap, void *);
 	return (itoa_base(ll, base, ucase));
 }
 
@@ -432,7 +433,7 @@ char	*putuintmax(va_list ap, int base, int ucase)
 {
 	uintmax_t m;
 
-	m = va_arg(ap, uintmax_t);
+	m = (uintmax_t)va_arg(ap, void *);
 	return (itoa_base(m, base, ucase));
 }
 
@@ -440,7 +441,7 @@ char	*putsizet(va_list ap, int base, int ucase)
 {
 	size_t		s;
 
-	s = va_arg(ap, size_t);
+	s = (size_t)va_arg(ap, void *);
 	return (itoa_base(s, base, ucase));
 }
 
@@ -899,7 +900,7 @@ void	putptr(va_list ap, f_flags **flags)
 
 	f = *flags;
 	ptr = va_arg(ap, void*);
-	f->str = ft_strjoin("0x", itoa_base((uintmax_t)ptr, 16, 1));
+	f->str = ft_strjoin("0x", itoa_base((uintmax_t)ptr, 16, 0));
 }
 
 void 	putform(char *s, va_list ap, f_flags **flags, int *index)
@@ -1196,28 +1197,28 @@ int		ft_printf(const char *format, ...)
 	return (index);
 }
 
-// int 	main(void)
-// {
-// 	int c = -1;
-// 	// printf("%d\n", printf("%x\n", c));
-// 	// printf("%d\n", ft_printf("%x\n", c));
+int 	main(void)
+{
+	int c = -1;
+	// printf("%d\n", printf("%x\n", c));
+	// printf("%d\n", ft_printf("%x\n", c));
 
-// 	// printf("%d\n", printf("%#x\n", c));
-// 	// printf("%d\n", ft_printf("%#x\n", c));
+	// printf("%d\n", printf("%#x\n", c));
+	// printf("%d\n", ft_printf("%#x\n", c));
 
-// 	printf("%d\n", printf("%d\n", c));
-// 	printf("%d\n", ft_printf("%d\n", c));
+	printf("%d\n", printf("%d\n", c));
+	printf("%d\n", ft_printf("%d\n", c));
 
-// 	// printf("%d\n", printf("%9.5x\n", c));
-// 	// printf("%d\n", ft_printf("%9.5x\n", c));
+	// printf("%d\n", printf("%9.5x\n", c));
+	// printf("%d\n", ft_printf("%9.5x\n", c));
 
-// 	// ft_printf("%#5.4x\n", 20);
-// 	// printf("%#6.4x\n", 20);
-// 	// ft_printf("%s\n", "abcd\0");
-// 	// ft_printf("%s\n", "abcd\n");
+	// ft_printf("%#5.4x\n", 20);
+	// printf("%#6.4x\n", 20);
+	// ft_printf("%s\n", "abcd\0");
+	// ft_printf("%s\n", "abcd\n");
 
-// 	return(0);
-// }
+	return(0);
+}
 /*
 populate flags/fw/precision/length/
 itoabase
