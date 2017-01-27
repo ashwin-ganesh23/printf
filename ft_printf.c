@@ -222,7 +222,20 @@ void	ft_putstrf(char *str)
 		ft_putcharf(*str++);
 }
 
-uintmax_t	find_digits(uintmax_t value, uintmax_t base)
+intmax_t	find_digits(intmax_t value, intmax_t base)
+{
+	intmax_t digits;
+
+	digits = 0;
+	while (value)
+	{
+		value /= base;
+		digits++;
+	}
+	return (digits);
+}
+
+uintmax_t	ufind_digits(uintmax_t value, uintmax_t base)
 {
 	uintmax_t digits;
 
@@ -307,7 +320,7 @@ char *utoa_base(uintmax_t value, uintmax_t base, int ucase)
 	max = value;
 	if (value == 0)
 		return ("0");
-	size = find_digits(value, base);
+	size = ufind_digits(value, base);
 	str = (char *)malloc(size + 1);
 	str[size] = '\0';
 	while (max)
