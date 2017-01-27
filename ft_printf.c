@@ -293,7 +293,7 @@ char *itoa_base(ssize_t value, int base, int ucase)
 
 char *utoa_base(size_t value, int base, int ucase)
 {
-	intmax_t	max;
+	uintmax_t	max;
 	int			size;
 	char		lbases[16] = "0123456789abcdef";
 	char		ubases[16] = "0123456789ABCDEF";
