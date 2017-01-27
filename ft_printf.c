@@ -351,98 +351,98 @@ char 	*itoa_base_signed(ssize_t value, int base, int ucase)
 
 char	*putsignedchar(va_list ap, int base, int ucase)
 {
-	signed char	c;
+	void	*c;
 
-	c = (signed char)va_arg(ap, void *);
-	return (itoa_base_signed(c, base, ucase));
+	c = va_arg(ap, void *);
+	return (itoa_base_signed((signed char)c, base, ucase));
 }
 
 char	*putshort(va_list ap, int base, int ucase)
 {
-	short 		c;
+	void	*c;
 
-	c = (short)va_arg(ap, void *);
-	return (itoa_base_signed(c, base, ucase));
+	c = va_arg(ap, void *);
+	return (itoa_base_signed((short)c, base, ucase));
 }
 
 char 	*putint(va_list ap, int base, int ucase)
 {
-	int 		i;
+	void	*i;
 
-	i = (int)va_arg(ap, void *);
-	return (itoa_base_signed(i, base, ucase));
+	i = va_arg(ap, void *);
+	return (itoa_base_signed((int)i, base, ucase));
 }
 
 char	*putlong(va_list ap, int base, int ucase)
 {
-	long		l;
+	void	*l;
 
-	l = (long)va_arg(ap, void *);
-	return (itoa_base_signed(l, base, ucase));
+	l = va_arg(ap, void *);
+	return (itoa_base_signed((long)l, base, ucase));
 }
 
 char	*putlonglong(va_list ap, int base, int ucase)
 {
-	long long	ll;
+	void	*ll;
 
-	ll = (long long)va_arg(ap, void *);
-	return (itoa_base_signed(ll, base, ucase));
+	ll = va_arg(ap, void *);
+	return (itoa_base_signed((long long)ll, base, ucase));
 }
 
 char	*putintmax(va_list ap, int base, int ucase)
 {
-	intmax_t	m;
+	void	*m;
 
-	m = (intmax_t)va_arg(ap, void *);
-	return (itoa_base_signed(m, base, ucase));
+	m = va_arg(ap, void *);
+	return (itoa_base_signed((intmax_t)m, base, ucase));
 }
 
 char	*putunsignedchar(va_list ap, int base, int ucase)
 {
-	unsigned char c;
+	void	*c;
 
-	c = (unsigned char)va_arg(ap, void *);
-	return (itoa_base(c, base, ucase));
+	c = va_arg(ap, void *);
+	return (itoa_base((unsigned char)c, base, ucase));
 }
 
 char	*putushort(va_list ap, int base, int ucase)
 {
-	unsigned short sh;
+	void	*sh;
 
-	sh = (unsigned short)va_arg(ap, void *);
-	return (itoa_base(sh, base, ucase));
+	sh = va_arg(ap, void *);
+	return (itoa_base((unsigned short)sh, base, ucase));
 }
 
 char	*putulong(va_list ap, int base, int ucase)
 {
-	unsigned long l;
+	void	*l;
 
-	l = (unsigned long)va_arg(ap, void *);
-	return (itoa_base(l, base, ucase));
+	l = va_arg(ap, void *);
+	return (itoa_base((unsigned long)l, base, ucase));
 }
 
 char	*putulonglong(va_list ap, int base, int ucase)
 {
-	unsigned long long ll;
+	void	*ll;
 
-	ll = (unsigned long long)va_arg(ap, void *);
-	return (itoa_base(ll, base, ucase));
+	ll = va_arg(ap, void *);
+	return (itoa_base((unsigned long long)ll, base, ucase));
 }
 
 char	*putuintmax(va_list ap, int base, int ucase)
 {
-	uintmax_t m;
+	void	*m;
 
-	m = (uintmax_t)va_arg(ap, void *);
-	return (itoa_base(m, base, ucase));
+	m = va_arg(ap, void *);
+	return (itoa_base((uintmax_t)m, base, ucase));
 }
 
 char	*putsizet(va_list ap, int base, int ucase)
 {
-	size_t		s;
+	void	*s;
 
-	s = (size_t)va_arg(ap, void *);
-	return (itoa_base(s, base, ucase));
+	s = va_arg(ap, void *);
+	return (itoa_base((size_t)s, base, ucase));
 }
 
 void	printhex(f_flags **flags, int ucase)
