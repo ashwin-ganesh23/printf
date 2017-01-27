@@ -415,34 +415,34 @@ char	*putushort(va_list ap, int base, int ucase)
 
 char	*putulong(va_list ap, int base, int ucase)
 {
-	void	*l;
+	unsigned long l;
 
-	l = va_arg(ap, void *);
-	return (itoa_base((unsigned long)l, base, ucase));
+	l = (unsigned long)va_arg(ap, void *);
+	return (itoa_base(l, base, ucase));
 }
 
 char	*putulonglong(va_list ap, int base, int ucase)
 {
-	void	*ll;
+	unsigned long long ll;
 
-	ll = va_arg(ap, void *);
-	return (itoa_base((unsigned long long)ll, base, ucase));
+	ll = (unsigned long long)va_arg(ap, void *);
+	return (itoa_base(ll, base, ucase));
 }
 
 char	*putuintmax(va_list ap, int base, int ucase)
 {
-	void	*m;
+	uintmax_t m;
 
-	m = va_arg(ap, void *);
-	return (itoa_base((uintmax_t)m, base, ucase));
+	m = (uintmax_t)va_arg(ap, void *);
+	return (itoa_base(m, base, ucase));
 }
 
 char	*putsizet(va_list ap, int base, int ucase)
 {
-	void	*s;
+	size_t		s;
 
-	s = va_arg(ap, void *);
-	return (itoa_base((size_t)s, base, ucase));
+	s = (size_t)va_arg(ap, void *);
+	return (itoa_base(s, base, ucase));
 }
 
 void	printhex(f_flags **flags, int ucase)
