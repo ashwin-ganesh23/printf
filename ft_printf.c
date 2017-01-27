@@ -222,9 +222,9 @@ void	ft_putstrf(char *str)
 		ft_putcharf(*str++);
 }
 
-int		find_digits(ssize_t value, int base)
+uintmax_t	find_digits(uintmax_t value, uintmax_t base)
 {
-	int digits;
+	uintmax_t digits;
 
 	digits = 0;
 	while (value)
@@ -304,13 +304,13 @@ char *utoa_base(uintmax_t value, uintmax_t base, int ucase)
 		bases = ubases;
 	else
 		bases = lbases;
-	max = (uintmax_t)value;
+	max = value;
 	if (value == 0)
 		return ("0");
-	size = find_digits(0 + max, base);
+	size = find_digits(value, base);
 	str = (char *)malloc(size + 1);
 	str[size] = '\0';
-	while (max != 0)
+	while (max)
 	{
 		str[--size] = bases[max % base];
 		max /= base;
@@ -445,7 +445,7 @@ char	*putulong(va_list ap, int base, int ucase)
 	void	*l;
 
 	l = va_arg(ap, void *);
-	return (itoa_base((unsigned long)l, base, ucase));
+	return (utoa_base((unsigned long)l, base, ucase));
 }
 
 char	*putulonglong(va_list ap, int base, int ucase)
@@ -453,7 +453,7 @@ char	*putulonglong(va_list ap, int base, int ucase)
 	void	*ll;
 
 	ll = va_arg(ap, void *);
-	return (itoa_base((unsigned long long)ll, base, ucase));
+	return (utoa_base((unsigned long long)ll, base, ucase));
 }
 
 char	*putuintmax(va_list ap, int base, int ucase)
@@ -461,7 +461,7 @@ char	*putuintmax(va_list ap, int base, int ucase)
 	void	*m;
 
 	m = va_arg(ap, void *);
-	return (itoa_base((uintmax_t)m, base, ucase));
+	return (utoa_base((uintmax_t)m, base, ucase));
 }
 
 char	*putsizet(va_list ap, int base, int ucase)
@@ -830,6 +830,7 @@ void 	putunsigned(va_list ap, f_flags **flags)
 	else
 		f->str = putuintmax(ap, 10, 0);
 	//call function to finalize str based on flags/fw/precision
+	printf("%s\n", f->str);
 	printun(&f);
 }
 
@@ -1235,15 +1236,17 @@ int		ft_printf(const char *format, ...)
 
 // int 	main(void)
 // {
-// 	int c = -1;
+// 	unsigned long c = 18446744073709551488;
 // 	// printf("%d\n", printf("%x\n", c));
 // 	// printf("%d\n", ft_printf("%x\n", c));
 
 // 	// printf("%d\n", printf("%#x\n", c));
 // 	// printf("%d\n", ft_printf("%#x\n", c));
 
-// 	printf("%d\n", printf("%d\n", c));
-// 	printf("%d\n", ft_printf("%d\n", c));
+// 	//printf("%d\n", printf("%lu\n", c));
+// 	//printf("%lu\n", c);
+// 	ft_printf("%lu\n", c);
+// 	//printf("%d\n", ft_printf("%lu\n", c));
 
 // 	// printf("%d\n", printf("%9.5x\n", c));
 // 	// printf("%d\n", ft_printf("%9.5x\n", c));

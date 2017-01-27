@@ -55,7 +55,7 @@ void	putzeros(int size);
 char	*ft_strfill(char *str, char c, int start, int end);
 void 	ft_putcharf(char c);
 void 	ft_putstrf(char *str);
-int		find_digits(ssize_t value, int base);
+uintmax_t	find_digits(uintmax_t value, uintmax_t base);
 char 	*itoa_base(uintmax_t value, uintmax_t base, int ucase);
 char 	*utoa_base(uintmax_t value, uintmax_t base, int ucase);
 char 	*itoa_base_signed(ssize_t value, int base, int ucase);
