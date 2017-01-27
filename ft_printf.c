@@ -717,7 +717,12 @@ void	printstr(f_flags **flags)
 	length = ft_strlen(f->str);
 	if (f->precision > 0 && f->precision < length)
 		length = f->precision;
-	if (f->fw > length)
+	if (f->str == NULL)
+	{
+		ft_putstrf("(null)");
+		f->size += 6;
+	}
+	else if (f->fw > length)
 	{
 		if (f->neg == 1)
 		{
