@@ -291,6 +291,33 @@ char *itoa_base(ssize_t value, int base, int ucase)
 	return (str);
 }
 
+char *utoa_base(size_t value, int base, int ucase)
+{
+	intmax_t	max;
+	int			size;
+	char		lbases[16] = "0123456789abcdef";
+	char		ubases[16] = "0123456789ABCDEF";
+	char 		*bases;
+	char		*str;
+
+	if (ucase == 1)
+		bases = ubases;
+	else
+		bases = lbases;
+	max = (intmax_t)value;
+	if (value == 0)
+		return ("0");
+	size = find_digits(value, base);
+	str = (char *)malloc(size + 1);
+	str[size] = '\0';
+	while (max != 0)
+	{
+		str[--size] = bases[max % base];
+		max /= base;
+	}
+	return (str);
+}
+
 char 	*itoa_base_signed(ssize_t value, int base, int ucase)
 {
 	intmax_t	max;
@@ -418,7 +445,7 @@ char	*putulong(va_list ap, int base, int ucase)
 	void	*l;
 
 	l = va_arg(ap, void *);
-	return (itoa_base((unsigned long)l, base, ucase));
+	return (utoa_base((unsigned long)l, base, ucase));
 }
 
 char	*putulonglong(va_list ap, int base, int ucase)
@@ -426,7 +453,7 @@ char	*putulonglong(va_list ap, int base, int ucase)
 	void	*ll;
 
 	ll = va_arg(ap, void *);
-	return (itoa_base((unsigned long long)ll, base, ucase));
+	return (utoa_base((unsigned long long)ll, base, ucase));
 }
 
 char	*putuintmax(va_list ap, int base, int ucase)
@@ -442,7 +469,7 @@ char	*putsizet(va_list ap, int base, int ucase)
 	void	*s;
 
 	s = va_arg(ap, void *);
-	return (itoa_base((size_t)s, base, ucase));
+	return (utoa_base((size_t)s, base, ucase));
 }
 
 void	printhex(f_flags **flags, int ucase)
