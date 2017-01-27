@@ -669,6 +669,7 @@ void	printdecimal(f_flags **flags)
 		{
 			if (f->zero == 1 && f->str[0] == '-' && f->pos != 1)
 				ft_putcharf('-');
+
 			(f->zero == 1 ? putzeros(f->fw - length) : putspaces(f->fw - length));
 			if ((int)ft_strlen(f->str) < length)
 			{
@@ -922,11 +923,11 @@ void 	putform(char *s, va_list ap, f_flags **flags, int *index)
 		putstrf(ap, &f);
 	else if (s[t] == 'p')
 		putptr(ap, &f);
-	else if (s[t] == 'd' || s[t] == 'i')
+	else if (s[t] == 'd' || s[t] == 'i' || s[t] == 'D')
 		putlint(ap, &f);
-	else if (s[t] == 'o')
+	else if (s[t] == 'o' || s[t] == 'O')
 		putoctal(ap, &f); //add another field for identifier
-	else if (s[t] == 'u')
+	else if (s[t] == 'u' || s[t] == 'U')
 		putunsigned(ap, &f); //same
 	else if (s[t] == 'x')
 		puthex(ap, &f, 0); //same
