@@ -260,9 +260,9 @@ int		find_digits(ssize_t value, int base)
 // 	return (str);
 // }
 
-char *itoa_base(ssize_t value, int base, int ucase)
+char *itoa_base(uintmax_t value, int base, int ucase)
 {
-	intmax_t	max;
+	uintmax_t	max;
 	int			size;
 	char		lbases[16] = "0123456789abcdef";
 	char		ubases[16] = "0123456789ABCDEF";
@@ -273,7 +273,7 @@ char *itoa_base(ssize_t value, int base, int ucase)
 		bases = ubases;
 	else
 		bases = lbases;
-	max = (intmax_t)value;
+	max = (uintmax_t)value;
 	if (value == 0)
 		return ("0");
 	if (value < 0)
@@ -291,7 +291,7 @@ char *itoa_base(ssize_t value, int base, int ucase)
 	return (str);
 }
 
-char *utoa_base(size_t value, int base, int ucase)
+char *utoa_base(uintmax_t value, int base, int ucase)
 {
 	uintmax_t	max;
 	int			size;
