@@ -304,10 +304,10 @@ char *utoa_base(size_t value, int base, int ucase)
 		bases = ubases;
 	else
 		bases = lbases;
-	max = (intmax_t)value;
+	max = (uintmax_t)value;
 	if (value == 0)
 		return ("0");
-	size = find_digits(value, base);
+	size = find_digits(0 + max, base);
 	str = (char *)malloc(size + 1);
 	str[size] = '\0';
 	while (max != 0)
