@@ -260,10 +260,10 @@ int		find_digits(ssize_t value, int base)
 // 	return (str);
 // }
 
-char *itoa_base(uintmax_t value, int base, int ucase)
+char *itoa_base(uintmax_t value, uintmax_t base, int ucase)
 {
 	uintmax_t	max;
-	int			size;
+	uintmax_t	size;
 	char		lbases[16] = "0123456789abcdef";
 	char		ubases[16] = "0123456789ABCDEF";
 	char 		*bases;
@@ -291,10 +291,10 @@ char *itoa_base(uintmax_t value, int base, int ucase)
 	return (str);
 }
 
-char *utoa_base(uintmax_t value, int base, int ucase)
+char *utoa_base(uintmax_t value, uintmax_t base, int ucase)
 {
 	uintmax_t	max;
-	int			size;
+	uintmax_t	size;
 	char		lbases[16] = "0123456789abcdef";
 	char		ubases[16] = "0123456789ABCDEF";
 	char 		*bases;
@@ -445,7 +445,7 @@ char	*putulong(va_list ap, int base, int ucase)
 	void	*l;
 
 	l = va_arg(ap, void *);
-	return (utoa_base((unsigned long)l, base, ucase));
+	return (itoa_base((unsigned long)l, base, ucase));
 }
 
 char	*putulonglong(va_list ap, int base, int ucase)
@@ -453,7 +453,7 @@ char	*putulonglong(va_list ap, int base, int ucase)
 	void	*ll;
 
 	ll = va_arg(ap, void *);
-	return (utoa_base((unsigned long long)ll, base, ucase));
+	return (itoa_base((unsigned long long)ll, base, ucase));
 }
 
 char	*putuintmax(va_list ap, int base, int ucase)
@@ -469,7 +469,7 @@ char	*putsizet(va_list ap, int base, int ucase)
 	void	*s;
 
 	s = va_arg(ap, void *);
-	return (utoa_base((size_t)s, base, ucase));
+	return (itoa_base((size_t)s, base, ucase));
 }
 
 void	printhex(f_flags **flags, int ucase)
