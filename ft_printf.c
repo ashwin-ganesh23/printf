@@ -717,12 +717,7 @@ void	printstr(f_flags **flags)
 	length = ft_strlen(f->str);
 	if (f->precision > 0 && f->precision < length)
 		length = f->precision;
-	if (f->str == NULL)
-	{
-		ft_putstrf("(null)");
-		f->size += 6;
-	}
-	else if (f->fw > length)
+	if (f->fw > length)
 	{
 		if (f->neg == 1)
 		{
@@ -772,10 +767,18 @@ void	printstr(f_flags **flags)
 void 	putstrf(va_list ap, f_flags **flags)
 {
 	f_flags *f;
+	void	*data;
 
 	f = *flags;
 	//call function to finalize str based on flags/fw/precision
-	f->str = va_arg(ap, char *);
+	data = va_arg(ap, void *);
+	if (data == NULL)
+	{
+		f->size += 6;
+		ft_putstrf("(null)");
+		return ;
+	}
+	f->str = (char *)data;
 	printstr(&f);
 }
 
