@@ -441,7 +441,7 @@ char	*putsizet(va_list ap, int base, int ucase)
 {
 	void	*s;
 
-	s = =va_arg(ap, void *);
+	s = va_arg(ap, void *);
 	return (itoa_base((size_t)s, base, ucase));
 }
 
