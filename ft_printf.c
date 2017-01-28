@@ -1003,6 +1003,8 @@ void 	putform(char *s, va_list ap, f_flags **flags, int *index)
 		putuchar(ap, &f);
 	t++;
 	ft_putstrf(f->str);
+	if (s[t-1] == 'S')
+		ft_putstrf(f->str);
 	f->size += (int)ft_strlen(f->str);
 	*index = t;
 }
