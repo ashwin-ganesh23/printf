@@ -38,9 +38,8 @@ typedef struct 	t_flags
 	int		size;
 }				f_flags;
 
-char	*g_conv = "sSpdDioOuUxXcC";
-char	*l_bases = "0123456789abcdef";
-char	*u_bases = "0123456789ABCDEF";
+extern char	*l_bases = "0123456789abcdef";
+exterm char	*u_bases = "0123456789ABCDEF";
 
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 char		*ft_strjoin(char const *s1, char const *s2);
