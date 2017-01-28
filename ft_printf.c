@@ -717,8 +717,8 @@ void	printdecimal(f_flags **flags)
 		{
 			if (f->zero == 1 && f->str[0] == '-' && f->pos != 1)
 				ft_putcharf('-');
-
-			(f->zero == 1 ? putzeros(f->fw - length) : putspaces(f->fw - length));
+			putspaces(f->fw - length);
+			//(f->zero == 1 ? putzeros(f->fw - length) : putspaces(f->fw - length));
 			if ((int)ft_strlen(f->str) < length)
 			{
 				if (f->zero != 1 && f->str[0] != '-' && f->pos == 1)
@@ -920,7 +920,7 @@ void 	putlint(va_list ap, f_flags **flags)
 	else if (f->z == 1)
 		f->str = putsizet(ap, 10, 0);
 	else
-		f->str = putint(ap, 10, 0);
+		f->str = putsizet(ap, 10, 0);
 	//call function to finalize str based on flags/fw/precision
 	printdecimal(&f);
 }
