@@ -605,7 +605,8 @@ void	printoctal(f_flags **flags)
 	{
 		if (length > (int)ft_strlen(f->str))
 		{
-			putzeros(length - ft_strlen(f->str));
+			if (!(str[0] == '0' && f->hash == 1))
+				putzeros(length - ft_strlen(f->str));
 			ft_putstrf(f->str);
 		}
 		else
