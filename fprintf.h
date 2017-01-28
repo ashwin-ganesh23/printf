@@ -72,6 +72,7 @@ char	*putulong(va_list ap, int base, int ucase);
 char	*putulonglong(va_list ap, int base, int ucase);
 char	*putuintmax(va_list ap, int base, int ucase);
 char	*putsizet(va_list ap, int base, int ucase);
+char 	*putusizet(va_list ap, int base, int ucase);
 
 void	printstr(f_flags **flags);
 void	printoctal(f_flags **flags);

@@ -485,6 +485,14 @@ char	*putsizet(va_list ap, int base, int ucase)
 	return (itoa_base((size_t)s, base, ucase));
 }
 
+char 	*putusizet(va_list ap, int base, int ucase)
+{
+	void	*s;
+
+	s = va_arg(ap, void *);
+	return (utoa_base((size_t)s, base, ucase));
+}
+
 void	printhex(f_flags **flags, int ucase)
 {
 	f_flags *f;
@@ -839,7 +847,7 @@ void 	putunsigned(va_list ap, f_flags **flags)
 	else if (f->j == 1)
 		f->str = putuintmax(ap, 10, 0);
 	else if (f->z == 1)
-		f->str = putsizet(ap, 10, 0);
+		f->str = putusizet(ap, 10, 0);
 	else
 		f->str = putuintmax(ap, 10, 0);
 	//call function to finalize str based on flags/fw/precision
@@ -863,7 +871,7 @@ void 	puthex(va_list ap, f_flags **flags, int ucase)
 	else if (f->j == 1)
 		f->str = putuintmax(ap, 16, ucase);
 	else if (f->z == 1)
-		f->str = putsizet(ap, 16, ucase);
+		f->str = putusizet(ap, 16, ucase);
 	else
 		f->str = putuintmax(ap, 16, ucase);
 	//call function to finalize str based on flags/fw/precision
@@ -886,7 +894,7 @@ void 	putoctal(va_list ap, f_flags **flags)
 	else if (f->j == 1)
 		f->str = putuintmax(ap, 8, 0);
 	else if (f->z == 1)
-		f->str = putsizet(ap, 8, 0);
+		f->str = putusizet(ap, 8, 0);
 	else
 		f->str = putuintmax(ap, 8, 0);
 	//call function to finalize str based on flags/fw/precision
