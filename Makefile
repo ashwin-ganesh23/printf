@@ -8,7 +8,23 @@ LIB =	ar rc
 
 RLIB =	ranlib
 
-SRCS = ft_printf.c
+SRCS = 
+SRCS += ft_printf.c
+SRCS += basic_puts.c
+SRCS += itoas.c
+SRCS += libft_funcs.c
+SRCS += libft_funcs_cont.c
+SRCS += populate_flags.c
+SRCS += print_decimal.c
+SRCS += print_hex.c
+SRCS += print_octal.c
+SRCS += print_str.c
+SRCS += print_un.c
+SRCS += put_chars.c
+SRCS += put_decimal.c
+SRCS += put_length.c
+SRCS += put_length_misc.c
+SRCS += put_ulength.c
 
 OBJS =	$(SRCS:.c=.o)
 
