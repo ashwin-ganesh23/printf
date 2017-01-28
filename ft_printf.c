@@ -920,7 +920,7 @@ void 	putlint(va_list ap, f_flags **flags)
 	else if (f->z == 1)
 		f->str = putsizet(ap, 10, 0);
 	else
-		f->str = putsizet(ap, 10, 0);
+		f->str = putint(ap, 10, 0);
 	//call function to finalize str based on flags/fw/precision
 	printdecimal(&f);
 }
