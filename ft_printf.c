@@ -1264,7 +1264,7 @@ int		ft_printf(const char *format, ...)
 	while (s[index])
 	{
 		if (s[index] == '%')
-			convspecifier(&f, ap, &index, s);
+			convspecifier(&flags, ap, &index, s);
 		else
 		{
 			flags->size += 1;

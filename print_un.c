@@ -58,11 +58,11 @@ char	*unhelper(f_flags **flags, int length)
 		tmp[f->fw] = '\0';
 	}
 	else
-		miniunhelper(&f, &tmp);
+		miniunhelper(&f, &tmp, length);
 	return (tmp);
 }
 
-void	miniunhelper(f_flags **flags, char **tp)
+void	miniunhelper(f_flags **flags, char **tp, int length)
 {
 	f_flags *f;
 	char	*tmp;

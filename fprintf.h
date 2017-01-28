@@ -92,18 +92,18 @@ void		octalhelp(f_flags **flags, int length);
 void		realoctalhelp(f_flags **flags, int length);
 
 void		printhex(f_flags **flags, int ucase);
-void		hexhelper(f_flags **flags, int length);
-void		realhexhelper(f_flags **flags, int length);
-void		realdealhex(f_flags **flags, int length);
+void		hexhelper(f_flags **flags, int length, int ucase);
+void		realhexhelper(f_flags **flags, int length, int ucase);
+void		realdealhex(f_flags **flags, int length, int ucase);
 
 void		printun(f_flags **flags);
 char		*unhelper(f_flags **flags, int length);
-void		miniunhelper(f_flags **flags, char **tp);
+void		miniunhelper(f_flags **flags, char **tp, int length);
 
 void		printdecimal(f_flags **flags);
 void		decposspace(f_flags **flags, int *length);
 void		decneghelper(f_flags **flags, int length);
-void		dechelp(f_flags **flags);
+void		dechelp(f_flags **flags, int length);
 
 void 		putunsigned(va_list ap, f_flags **flags);
 void 		puthex(va_list ap, f_flags **flags, int ucase);
