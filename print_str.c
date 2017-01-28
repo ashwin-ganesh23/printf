@@ -77,5 +77,5 @@ void	otherstrhelp(f_flags **flags, int length)
 		putspaces(f->fw - (f->precision > length ? f->precision : length));
 		ft_putstrl(f->str, length);
 	}
-	f->size += l;
+	f->size += length;
 }
