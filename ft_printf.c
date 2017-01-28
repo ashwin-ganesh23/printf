@@ -857,7 +857,6 @@ void 	putunsigned(va_list ap, f_flags **flags)
 	else
 		f->str = putuintmax(ap, 10, 0);
 	//call function to finalize str based on flags/fw/precision
-	printf("%s\n", f->str);
 	printun(&f);
 }
 
