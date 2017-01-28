@@ -273,7 +273,7 @@ uintmax_t	ufind_digits(uintmax_t value, uintmax_t base)
 // 	return (str);
 // }
 
-char *itoa_base(uintmax_t value, uintmax_t base, int ucase)
+char *itoa_base(intmax_t value, intmax_t base, int ucase)
 {
 	uintmax_t	max;
 	uintmax_t	size;
@@ -286,7 +286,7 @@ char *itoa_base(uintmax_t value, uintmax_t base, int ucase)
 		bases = ubases;
 	else
 		bases = lbases;
-	max = (uintmax_t)value;
+	max = (intmax_t)value;
 	if (value == 0)
 		return ("0");
 	if (value < 0)

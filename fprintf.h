@@ -57,7 +57,7 @@ void 	ft_putcharf(char c);
 void 	ft_putstrf(char *str);
 intmax_t	find_digits(intmax_t value, intmax_t base);
 uintmax_t	ufind_digits(uintmax_t value, uintmax_t base);
-char 	*itoa_base(uintmax_t value, uintmax_t base, int ucase);
+char 	*itoa_base(intmax_t value, intmax_t base, int ucase);
 char 	*utoa_base(uintmax_t value, uintmax_t base, int ucase);
 char 	*itoa_base_signed(ssize_t value, int base, int ucase);
 char	*putsignedchar(va_list ap, int base, int ucase);
