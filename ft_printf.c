@@ -717,8 +717,8 @@ void	printdecimal(f_flags **flags)
 		{
 			if (f->zero == 1 && f->str[0] == '-' && f->pos != 1)
 				ft_putcharf('-');
-
-			(f->zero == 1 ? putzeros(f->fw - length) : putspaces(f->fw - length));
+			putspaces(f->fw - length);
+			// (f->zero == 1 ? putzeros(f->fw - length) : putspaces(f->fw - length));
 			if ((int)ft_strlen(f->str) < length)
 			{
 				if (f->zero != 1 && f->str[0] != '-' && f->pos == 1)
@@ -727,7 +727,10 @@ void	printdecimal(f_flags **flags)
 				(f->str[0] == '-' && (f->pos == 1 || f->zero == 1) ? ft_putstrf(f->str + 1) : ft_putstrf(f->str));
 			}
 			else
+			{
+
 				(f->str[0] == '-' && (f->pos == 1 || f->zero == 1) ? ft_putstrf(f->str + 1) : ft_putstrf(f->str));
+			}
 			//ft_putstrf(f->str);
 		}
 		f->size += f->fw;
