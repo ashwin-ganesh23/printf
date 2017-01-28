@@ -925,6 +925,15 @@ void 	putlint(va_list ap, f_flags **flags)
 	printdecimal(&f);
 }
 
+void	putlongint(va_list ap, f_flags **flags)
+{
+	f_flags *f;
+
+	f = *flags;
+	f->str = putlong(ap, 10, 0);
+	printdecimal(&f);
+}
+
 void 	putuchar(va_list ap, f_flags **flags)
 {
 	f_flags		*f;
@@ -972,8 +981,10 @@ void 	putform(char *s, va_list ap, f_flags **flags, int *index)
 		putstrf(ap, &f);
 	else if (s[t] == 'p')
 		putptr(ap, &f);
-	else if (s[t] == 'd' || s[t] == 'i' || s[t] == 'D')
+	else if (s[t] == 'd' || s[t] == 'i')
 		putlint(ap, &f);
+	else if (s[t] == 'D')
+		putlongint(ap, &f);
 	else if (s[t] == 'o' || s[t] == 'O')
 		putoctal(ap, &f); //add another field for identifier
 	else if (s[t] == 'u' || s[t] == 'U')

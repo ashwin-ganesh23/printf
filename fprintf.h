@@ -88,6 +88,7 @@ void 	putunsigned(va_list ap, f_flags **flags);
 void 	puthex(va_list ap, f_flags **flags, int ucase);
 void 	putoctal(va_list ap, f_flags **flags);
 void 	putlint(va_list ap, f_flags **flags);
+void	putlongint(va_list ap, f_flags **flags);
 
 void 	putuchar(va_list ap, f_flags **flags);
 void 	putform(char *s, va_list ap, f_flags **flags, int *index);
