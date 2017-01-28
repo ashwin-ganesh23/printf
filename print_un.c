@@ -38,7 +38,7 @@ void	printun(f_flags **flags)
 	f->str = tmp;
 }
 
-char	*unhelper(f_flags **flags)
+char	*unhelper(f_flags **flags, int length)
 {
 	f_flags	*f;
 	char 	*tmp;

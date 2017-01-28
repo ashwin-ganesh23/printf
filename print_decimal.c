@@ -23,7 +23,7 @@ void	printdecimal(f_flags **flags)
 		length = f->precision;
 	decposspace(&f, &length);
 	if (f->fw > length)
-		dechelp(&f);
+		dechelp(&f, length);
 	else
 	{
 		if (length > (int)ft_strlen(f->str))
@@ -89,7 +89,7 @@ void	decneghelper(f_flags **flags, int length)
 		(f->str[0] == '-' && (f->pos == 1 || f->zero == 1) ? ft_putstrf(f->str + 1) : ft_putstrf(f->str));
 }
 
-void	dechelp(f_flags **flags)
+void	dechelp(f_flags **flags, int length)
 {
 	f_flags *f;
 

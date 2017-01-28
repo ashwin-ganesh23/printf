@@ -97,7 +97,7 @@ void		realhexhelper(f_flags **flags, int length);
 void		realdealhex(f_flags **flags, int length);
 
 void		printun(f_flags **flags);
-char		*unhelper(f_flags **flags);
+char		*unhelper(f_flags **flags, int length);
 void		miniunhelper(f_flags **flags, char **tp);
 
 void		printdecimal(f_flags **flags);
