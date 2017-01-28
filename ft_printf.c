@@ -717,7 +717,7 @@ void	printdecimal(f_flags **flags)
 		{
 			if (f->zero == 1 && f->str[0] == '-' && f->pos != 1)
 				ft_putcharf('-');
-			if (f->precision > length)
+			if (f->precision > ft_strlen(f->str))
 				putspaces(f->fw - length);
 			else
 				(f->zero == 1 ? putzeros(f->fw - length) : putspaces(f->fw - length));
