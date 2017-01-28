@@ -1239,12 +1239,12 @@ void	convspecifier(f_flags **flags, va_list ap, int *i, char *s)
 	index = *i;
 	index++;
 	if (issymbol(s, &index))
-		checksymbols(s, &flags, &index);
+		checksymbols(s, &f, &index);
 	if (isconv(s, &index))
-		putform(s, ap, &flags, &index);
+		putform(s, ap, &f, &index);
 	else
-		putrandchar(s, &flags, &index);
-	setflags(&flags);
+		putrandchar(s, &f, &index);
+	setflags(&f);
 	*i = index;
 }
 

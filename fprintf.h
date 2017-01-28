@@ -54,6 +54,7 @@ void		putspaces(int size);
 void		putzeros(int size);
 void 		ft_putcharf(char c);
 void	 	ft_putstrf(char *str);
+void		ft_putstrl(char *str, int size);
 
 intmax_t	find_digits(intmax_t value, intmax_t base);
 uintmax_t	ufind_digits(uintmax_t value, uintmax_t base);

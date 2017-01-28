@@ -23,7 +23,7 @@ void	printun(f_flags **flags)
 	if (f->precision > length)
 		length = f->precision;
 	if (f->fw > length)
-		tmp = unhelper(&f, &tmp);
+		tmp = unhelper(&f, length);
 	else
 	{
 		tmp = ft_strnew(length);

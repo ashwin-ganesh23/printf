@@ -1,6 +1,6 @@
 CC =	gcc
 
-FLAG =	-c -Wall -Wextra -Werror -O2
+FLAG =	-c -Wall -Wextra -Werror
 
 NAME =	libftprintf.a
 
@@ -8,8 +8,7 @@ LIB =	ar rc
 
 RLIB =	ranlib
 
-SRCS = 
-SRCS += ft_printf.c
+SRCS =  ft_printf.c
 SRCS += basic_puts.c
 SRCS += itoas.c
 SRCS += libft_funcs.c

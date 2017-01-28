@@ -41,19 +41,18 @@ void	printdecimal(f_flags **flags)
 void	decposspace(f_flags **flags, int *length)
 {
 	f_flags *f;
-	int		*l;
+	int		l;
 
 	f = *flags;
 	l = *length;
 	if (f->pos == 1)
 	{
-		if (f->str[0] != '-')
-			if (!(f->zero != 1 && f->fw > length && f->neg != 1))
-				ft_putcharf('+');
+		if (f->str[0] != '-' && f->zero == 1 && f->fw <= l && f->neg == 1)
+			ft_putcharf('+');
 		else if (f->str[0] == '-')
 		{
 			ft_putcharf('-');
-			length--;
+			l--;
 		}
 		f->size += 1;
 		f->fw--;
@@ -74,7 +73,7 @@ void	decneghelper(f_flags **flags, int length)
 	f = *flags;
 	if (f->zero == 1 && f->str[0] == '-' && f->pos != 1)
 		ft_putcharf('-');
-	if (f->precision >= ft_strlen(f->str))
+	if (f->precision >= (int)ft_strlen(f->str))
 		putspaces(f->fw - length);
 	else
 		(f->zero == 1 ? putzeros(f->fw - length) : putspaces(f->fw - length));

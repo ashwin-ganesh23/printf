@@ -93,7 +93,7 @@ char 	*itoa_base_signed(ssize_t value, int base, int ucase)
 	char 		*bases;
 	char		*str;
 
-	bases = "0123456789ABCDEF";
+	bases = (ucase == 1) ? "0123456789ABCDEF" : "0123456789abcdef";
 	max = (intmax_t)value;
 	if (value == 0)
 		return ("0");
