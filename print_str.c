@@ -18,7 +18,7 @@ void	printstr(f_flags **flags)
 	int length;
 
 	f = *flags;
-	length = ft_strlen(f->str);
+	length = (int)ft_strlen(f->str);
 	if (f->precision > 0 && f->precision < length)
 		length = f->precision;
 	if (f->fw > length)
@@ -60,25 +60,22 @@ void	strfwlhelp(f_flags **flags, int length)
 void	otherstrhelp(f_flags **flags, int length)
 {
 	f_flags *f;
-	int		*l;
 
 	f = *flags;
-	l = *length;
 	if (f->neg == 1)
 	{
-		ft_putstrl(f->str, l);
-		putspaces(f->fw - (f->precision > l ? f->precision : l));
+		ft_putstrl(f->str, length);
+		putspaces(f->fw - (f->precision > length ? f->precision : length));
 	}
 	else if (f->zero == 1)
 	{
-		putzeros(f->fw - (f->precision > l ? f->precision : l));
-		ft_putstrl(f->str, l);
+		putzeros(f->fw - (f->precision > length ? f->precision : length));
+		ft_putstrl(f->str, length);
 	}
 	else
 	{
-		putspaces(f->fw - (f->precision > l ? f->precision : l));
-		ft_putstrl(f->str, l);
+		putspaces(f->fw - (f->precision > length ? f->precision : length));
+		ft_putstrl(f->str, length);
 	}
 	f->size += l;
-	*length = l;
 }

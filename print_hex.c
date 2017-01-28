@@ -29,13 +29,13 @@ void	printhex(f_flags **flags, int ucase)
 		f->size += 1;
 	}
 	else if (f->fw > length)
-		realhexhelper(&f, length);
+		realhexhelper(&f, length, ucase);
 	else
-		realdealhex(&f, length);
+		realdealhex(&f, length, ucase);
 	f->str = "";
 }
 
-void	hexhelper(f_flags **flags, int length)
+void	hexhelper(f_flags **flags, int length, int ucase)
 {
 	f_flags *f;
 
@@ -55,7 +55,7 @@ void	hexhelper(f_flags **flags, int length)
 		ft_putstrf(f->str);	
 }
 
-void	realhexhelper(f_flags **flags, int length)
+void	realhexhelper(f_flags **flags, int length, int ucase)
 {
 	f_flags *f;
 
@@ -74,11 +74,11 @@ void	realhexhelper(f_flags **flags, int length)
 		putspaces(f->fw - length);
 	}
 	else
-		hexhelper(&f, length);
+		hexhelper(&f, length, ucase);
 	f->size += f->fw;
 }
 
-void	realdealhex(f_flags **flags, int length)
+void	realdealhex(f_flags **flags, int length, int ucase)
 {
 	f_flags *f;
 
