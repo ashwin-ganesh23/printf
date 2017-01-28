@@ -45,7 +45,7 @@ char *itoa_base(intmax_t value, intmax_t base, int ucase)
 	char 		*bases;
 	char		*str;
 
-	bases = (ucase == 1) ? u_bases : l_bases;
+	bases = (ucase == 1) ? "0123456789ABCDEF" : "0123456789abcdef";
 	max = (intmax_t)value;
 	if (value == 0)
 		return ("0");
@@ -71,7 +71,7 @@ char *utoa_base(uintmax_t value, uintmax_t base, int ucase)
 	char 		*bases;
 	char		*str;
 
-	bases = (ucase == 1) ? u_bases : l_bases;
+	bases = (ucase == 1) ? "0123456789ABCDEF" : "0123456789abcdef";
 	max = value;
 	if (value == 0)
 		return ("0");
@@ -93,7 +93,7 @@ char 	*itoa_base_signed(ssize_t value, int base, int ucase)
 	char 		*bases;
 	char		*str;
 
-	bases = (ucase == 1) ? u_bases : l_bases;
+	bases = "0123456789ABCDEF";
 	max = (intmax_t)value;
 	if (value == 0)
 		return ("0");
