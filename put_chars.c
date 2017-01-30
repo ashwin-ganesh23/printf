@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fprintf.h"
+#include "ft_printf.h"
 
-void	putuchar(va_list ap, f_flags **flags)
+void	putuchar(va_list ap, t_flags **flags)
 {
-	f_flags		*f;
+	t_flags		*f;
 	int			c;
 
 	f = *flags;
@@ -38,9 +38,9 @@ void	putuchar(va_list ap, f_flags **flags)
 		ft_putcharf(c);
 }
 
-void	putptr(va_list ap, f_flags **flags)
+void	putptr(va_list ap, t_flags **flags)
 {
-	f_flags		*f;
+	t_flags		*f;
 	void		*ptr;
 
 	f = *flags;
@@ -50,10 +50,10 @@ void	putptr(va_list ap, f_flags **flags)
 	f->size += (int)ft_strlen(f->str);
 }
 
-void	putform(char *s, va_list ap, f_flags **flags, int *index)
+void	putform(char *s, va_list ap, t_flags **flags, int *index)
 {
 	int		t;
-	f_flags *f;
+	t_flags *f;
 
 	t = *index;
 	f = *flags;
@@ -78,9 +78,9 @@ void	putform(char *s, va_list ap, f_flags **flags, int *index)
 	*index = ++t;
 }
 
-void	putrandchar(char *s, f_flags **flags, int *index)
+void	putrandchar(char *s, t_flags **flags, int *index)
 {
-	f_flags *f;
+	t_flags *f;
 	int		i;
 
 	i = *index;
@@ -107,9 +107,9 @@ void	putrandchar(char *s, f_flags **flags, int *index)
 	*index = i;
 }
 
-void	putstrf(va_list ap, f_flags **flags)
+void	putstrf(va_list ap, t_flags **flags)
 {
-	f_flags *f;
+	t_flags *f;
 	void	*data;
 
 	f = *flags;

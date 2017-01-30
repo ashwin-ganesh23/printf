@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fprintf.h"
+#include "ft_printf.h"
 
-void	printstr(f_flags **flags)
+void	printstr(t_flags **flags)
 {
-	f_flags *f;
+	t_flags *f;
 	int		length;
 
 	f = *flags;
@@ -28,9 +28,9 @@ void	printstr(f_flags **flags)
 	f->str = "";
 }
 
-void	strfwlhelp(f_flags **flags, int length)
+void	strfwlhelp(t_flags **flags, int length)
 {
-	f_flags *f;
+	t_flags *f;
 
 	f = *flags;
 	if (f->neg == 1)
@@ -57,9 +57,9 @@ void	strfwlhelp(f_flags **flags, int length)
 	f->size += f->fw;
 }
 
-void	otherstrhelp(f_flags **flags, int length)
+void	otherstrhelp(t_flags **flags, int length)
 {
-	f_flags *f;
+	t_flags *f;
 
 	f = *flags;
 	if (f->neg == 1)

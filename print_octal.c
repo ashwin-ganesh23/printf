@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fprintf.h"
+#include "ft_printf.h"
 
-void	printoctal(f_flags **flags)
+void	printoctal(t_flags **flags)
 {
-	f_flags *f;
+	t_flags *f;
 	int		length;
 
 	f = *flags;
@@ -40,9 +40,9 @@ void	printoctal(f_flags **flags)
 	f->str = "";
 }
 
-void	octalhelp(f_flags **flags, int length)
+void	octalhelp(t_flags **flags, int length)
 {
-	f_flags		*f;
+	t_flags		*f;
 
 	f = *flags;
 	if (f->zero == 1)
@@ -58,9 +58,9 @@ void	octalhelp(f_flags **flags, int length)
 		ft_putstrf(f->str);
 }
 
-void	realoctalhelp(f_flags **flags, int length)
+void	realoctalhelp(t_flags **flags, int length)
 {
-	f_flags		*f;
+	t_flags		*f;
 
 	f = *flags;
 	if (f->neg == 1)

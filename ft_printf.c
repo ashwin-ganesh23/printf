@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fprintf.h"
+#include "ft_printf.h"
 
-void		checksymbols(char *s, f_flags **flags, int *index)
+void	checksymbols(char *s, t_flags **flags, int *index)
 {
-	int 	t;
-	f_flags *f;
+	int		t;
+	t_flags *f;
 
 	f = *flags;
 	t = *index;
@@ -44,9 +44,9 @@ int		isconv(char *str, int *index)
 	return (0);
 }
 
-void	setflags(f_flags **flags)
+void	setflags(t_flags **flags)
 {
-	f_flags *f;
+	t_flags *f;
 
 	f = *flags;
 	f->hash = 0;
@@ -66,10 +66,10 @@ void	setflags(f_flags **flags)
 	f->str = "";
 }
 
-void	convspecifier(f_flags **flags, va_list ap, int *i, char *s)
+void	convspecifier(t_flags **flags, va_list ap, int *i, char *s)
 {
-	f_flags *f;
-	int 	index;
+	t_flags *f;
+	int		index;
 
 	f = *flags;
 	index = *i;
@@ -86,12 +86,12 @@ void	convspecifier(f_flags **flags, va_list ap, int *i, char *s)
 
 int		ft_printf(const char *format, ...)
 {
-	char 	*s;
+	char	*s;
 	int		index;
-	va_list ap;
-	f_flags	*flags;
+	va_list	ap;
+	t_flags	*flags;
 
-	flags = malloc(sizeof(f_flags));
+	flags = malloc(sizeof(t_flags));
 	s = (char *)format;
 	va_start(ap, format);
 	setflags(&flags);

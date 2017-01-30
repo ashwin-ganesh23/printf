@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fprintf.h"
+#include "ft_printf.h"
 
 void	putspaces(int size)
 {

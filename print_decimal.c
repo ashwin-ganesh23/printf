@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printdec.c                                         :+:      :+:    :+:   */
+/*   printdecimal.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aganesh <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fprintf.h"
+#include "ft_printf.h"
 
-void	printdecimal(f_flags **flags)
+void	printdecimal(t_flags **flags)
 {
-	f_flags *f;
+	t_flags *f;
 	int		length;
 
 	f = *flags;
@@ -38,9 +38,9 @@ void	printdecimal(f_flags **flags)
 	f->str = "";
 }
 
-void	decposspace(f_flags **flags, int *length)
+void	decposspace(t_flags **flags, int *length)
 {
-	f_flags *f;
+	t_flags *f;
 	int		l;
 
 	f = *flags;
@@ -65,9 +65,9 @@ void	decposspace(f_flags **flags, int *length)
 	*length = l;
 }
 
-void	decneghelper(f_flags **flags, int length)
+void	decneghelper(t_flags **flags, int length)
 {
-	f_flags *f;
+	t_flags *f;
 	int		bol;
 
 	f = *flags;
@@ -89,9 +89,9 @@ void	decneghelper(f_flags **flags, int length)
 		ft_putstrf(f->str + bol);
 }
 
-void	dechelp(f_flags **flags, int length)
+void	dechelp(t_flags **flags, int length)
 {
-	f_flags *f;
+	t_flags *f;
 
 	f = *flags;
 	if (f->neg == 1)

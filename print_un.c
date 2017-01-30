@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fprintf.h"
+#include "ft_printf.h"
 
-void	printun(f_flags **flags)
+void	printun(t_flags **flags)
 {
-	f_flags *f;
+	t_flags *f;
 	char	*tmp;
 	int		length;
 	int		strlen;
@@ -40,9 +40,9 @@ void	printun(f_flags **flags)
 	f->str = tmp;
 }
 
-char	*unhelper(f_flags **flags, int length, int strlen)
+char	*unhelper(t_flags **flags, int length, int strlen)
 {
-	f_flags	*f;
+	t_flags	*f;
 	char	*tmp;
 
 	f = *flags;
@@ -64,9 +64,9 @@ char	*unhelper(f_flags **flags, int length, int strlen)
 	return (tmp);
 }
 
-void	miniunhelper(f_flags **flags, char **tp, int length)
+void	miniunhelper(t_flags **flags, char **tp, int length)
 {
-	f_flags *f;
+	t_flags *f;
 	char	*tmp;
 
 	f = *flags;

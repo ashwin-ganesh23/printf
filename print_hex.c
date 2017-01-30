@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fprintf.h"
+#include "ft_printf.h"
 
-void	printhex(f_flags **flags, int ucase)
+void	printhex(t_flags **flags, int ucase)
 {
-	f_flags *f;
-	int length;
+	t_flags *f;
+	int		length;
 
 	f = *flags;
 	length = ft_strlen(f->str);
@@ -35,15 +35,15 @@ void	printhex(f_flags **flags, int ucase)
 	f->str = "";
 }
 
-void	hexhelper(f_flags **flags, int length, int ucase)
+void	hexhelper(t_flags **flags, int length, int ucase)
 {
-	f_flags *f;
+	t_flags *f;
 
 	f = *flags;
 	if (f->zero == 0)
 		putspaces(f->fw - length);
 	if (f->hash == 1)
-		(ucase == 1 ? ft_putstrf("0X") : ft_putstrf("0x"));			
+		(ucase == 1 ? ft_putstrf("0X") : ft_putstrf("0x"));
 	if (f->zero == 1)
 		putzeros(f->fw - length);
 	if ((int)ft_strlen(f->str) < length)
@@ -51,13 +51,13 @@ void	hexhelper(f_flags **flags, int length, int ucase)
 		putzeros(f->precision - ft_strlen(f->str));
 		ft_putstrf(f->str);
 	}
-	else 
-		ft_putstrf(f->str);	
+	else
+		ft_putstrf(f->str);
 }
 
-void	realhexhelper(f_flags **flags, int length, int ucase)
+void	realhexhelper(t_flags **flags, int length, int ucase)
 {
-	f_flags *f;
+	t_flags *f;
 
 	f = *flags;
 	if (f->neg == 1)
@@ -69,7 +69,7 @@ void	realhexhelper(f_flags **flags, int length, int ucase)
 			putzeros(f->precision - ft_strlen(f->str));
 			ft_putstrf(f->str);
 		}
-		else 
+		else
 			ft_putstrf(f->str);
 		putspaces(f->fw - length);
 	}
@@ -78,9 +78,9 @@ void	realhexhelper(f_flags **flags, int length, int ucase)
 	f->size += f->fw;
 }
 
-void	realdealhex(f_flags **flags, int length, int ucase)
+void	realdealhex(t_flags **flags, int length, int ucase)
 {
-	f_flags *f;
+	t_flags *f;
 
 	f = *flags;
 	if (f->hash == 1)

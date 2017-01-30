@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fprintf.h"
+#include "ft_printf.h"
 
 intmax_t	find_digits(intmax_t value, intmax_t base)
 {

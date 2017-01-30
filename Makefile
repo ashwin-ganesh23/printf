@@ -30,7 +30,7 @@ OBJS =	$(SRCS:.c=.o)
 all: 	$(NAME)
 
 $(NAME):
-		@$(CC) $(FLAG) $(SRCS)
+		@$(CC) $(FLAG) $(SRCS) -I ./ft_printf.h
 		@$(LIB) $(NAME) $(OBJS)
 		@$(RLIB) $(NAME)
 

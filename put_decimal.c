@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fprintf.h"
+#include "ft_printf.h"
 
-void	putunsigned(va_list ap, f_flags **flags)
+void	putunsigned(va_list ap, t_flags **flags)
 {
-	f_flags *f;
+	t_flags *f;
 
 	f = *flags;
 	if (f->hh == 1)
@@ -36,9 +36,9 @@ void	putunsigned(va_list ap, f_flags **flags)
 	f->size += (int)ft_strlen(f->str);
 }
 
-void	puthex(va_list ap, f_flags **flags, int ucase)
+void	puthex(va_list ap, t_flags **flags, int ucase)
 {
-	f_flags *f;
+	t_flags *f;
 
 	f = *flags;
 	if (f->hh == 1)
@@ -58,9 +58,9 @@ void	puthex(va_list ap, f_flags **flags, int ucase)
 	printhex(&f, ucase);
 }
 
-void	putoctal(va_list ap, f_flags **flags)
+void	putoctal(va_list ap, t_flags **flags)
 {
-	f_flags *f;
+	t_flags *f;
 
 	f = *flags;
 	if (f->hh == 1)
@@ -80,9 +80,9 @@ void	putoctal(va_list ap, f_flags **flags)
 	printoctal(&f);
 }
 
-void	putlint(va_list ap, f_flags **flags)
+void	putlint(va_list ap, t_flags **flags)
 {
-	f_flags *f;
+	t_flags *f;
 
 	f = *flags;
 	if (f->hh == 1)
@@ -102,9 +102,9 @@ void	putlint(va_list ap, f_flags **flags)
 	printdecimal(&f);
 }
 
-void	putlongint(va_list ap, f_flags **flags)
+void	putlongint(va_list ap, t_flags **flags)
 {
-	f_flags *f;
+	t_flags *f;
 
 	f = *flags;
 	f->str = putlong(ap, 10, 0);

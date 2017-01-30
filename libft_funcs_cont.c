@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fprintf.h"
+#include "ft_printf.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -61,7 +61,7 @@ void	*ft_memset(void *b, int c, size_t len)
 
 char	*ft_strfill(char *str, char c, int start, int end)
 {
-	char 	*tmp;
+	char	*tmp;
 
 	tmp = str;
 	while (start < end)
