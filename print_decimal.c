@@ -52,8 +52,11 @@ void	decposspace(f_flags **flags, int *length)
 			if (!(f->zero != 1 && f->fw > l && f->neg != 1))
 				ft_putcharf('+');
 		}
-		else if (f->str[0] == '-' && l--)
+		else if (f->str[0] == '-')
+		{
 			ft_putcharf('-');
+			l--;
+		}
 	}
 	else if (f->space == 1 && f->str[0] != '-')
 		ft_putcharf(' ');
