@@ -12,10 +12,10 @@
 
 #include "fprintf.h"
 
-void 	putuchar(va_list ap, f_flags **flags)
+void	putuchar(va_list ap, f_flags **flags)
 {
 	f_flags		*f;
-	int 		c;
+	int			c;
 
 	f = *flags;
 	c = (unsigned char)va_arg(ap, int);
@@ -41,14 +41,16 @@ void 	putuchar(va_list ap, f_flags **flags)
 void	putptr(va_list ap, f_flags **flags)
 {
 	f_flags		*f;
-	void 		*ptr;
+	void		*ptr;
 
 	f = *flags;
 	ptr = va_arg(ap, void*);
 	f->str = ft_strjoin("0x", itoa_base((uintmax_t)ptr, 16, 0));
+	ft_putstrf(f->str);
+	f->size += (int)ft_strlen(f->str);
 }
 
-void 	putform(char *s, va_list ap, f_flags **flags, int *index)
+void	putform(char *s, va_list ap, f_flags **flags, int *index)
 {
 	int		t;
 	f_flags *f;
@@ -64,25 +66,22 @@ void 	putform(char *s, va_list ap, f_flags **flags, int *index)
 	else if (s[t] == 'D')
 		putlongint(ap, &f);
 	else if (s[t] == 'o' || s[t] == 'O')
-		putoctal(ap, &f); //add another field for identifier
+		putoctal(ap, &f);
 	else if (s[t] == 'u' || s[t] == 'U')
-		putunsigned(ap, &f); //same
+		putunsigned(ap, &f);
 	else if (s[t] == 'x')
-		puthex(ap, &f, 0); //same
+		puthex(ap, &f, 0);
 	else if (s[t] == 'X')
 		puthex(ap, &f, 1);
 	else if (s[t] == 'c' || s[t] == 'C')
 		putuchar(ap, &f);
-	t++;
-	ft_putstrf(f->str);
-	f->size += (int)ft_strlen(f->str);
-	*index = t;
+	*index = ++t;
 }
 
 void	putrandchar(char *s, f_flags **flags, int *index)
 {
 	f_flags *f;
-	int 	i;
+	int		i;
 
 	i = *index;
 	f = *flags;
@@ -108,13 +107,12 @@ void	putrandchar(char *s, f_flags **flags, int *index)
 	*index = i;
 }
 
-void 	putstrf(va_list ap, f_flags **flags)
+void	putstrf(va_list ap, f_flags **flags)
 {
 	f_flags *f;
 	void	*data;
 
 	f = *flags;
-	//call function to finalize str based on flags/fw/precision
 	data = va_arg(ap, void *);
 	if (data == NULL)
 	{

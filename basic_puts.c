@@ -26,7 +26,7 @@ void	putspaces(int size)
 
 void	putzeros(int size)
 {
-	int 	i;
+	int	i;
 
 	i = 0;
 	while (i < size)

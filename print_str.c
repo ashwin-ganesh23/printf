@@ -15,7 +15,7 @@
 void	printstr(f_flags **flags)
 {
 	f_flags *f;
-	int length;
+	int		length;
 
 	f = *flags;
 	length = (int)ft_strlen(f->str);

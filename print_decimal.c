@@ -15,7 +15,7 @@
 void	printdecimal(f_flags **flags)
 {
 	f_flags *f;
-	int 	length;
+	int		length;
 
 	f = *flags;
 	length = ft_strlen(f->str);
@@ -29,10 +29,10 @@ void	printdecimal(f_flags **flags)
 		if (length > (int)ft_strlen(f->str))
 		{
 			putzeros(length - ft_strlen(f->str));
-			(f->str[0] == '-' && f->pos == 1 ? ft_putstrf(f->str + 1) : ft_putstrf(f->str));
+			ft_putstrf(f->str[0] == '-' && f->pos == 1 ? f->str + 1 : f->str);
 		}
 		else
-			((f->str[0] == '-' && f->pos == 1) ? ft_putstrf(f->str + 1) : ft_putstrf(f->str));
+			ft_putstrf(f->str[0] == '-' && f->pos == 1 ? f->str + 1 : f->str);
 		f->size += length;
 	}
 	f->str = "";
@@ -52,17 +52,13 @@ void	decposspace(f_flags **flags, int *length)
 			if (!(f->zero != 1 && f->fw > l && f->neg != 1))
 				ft_putcharf('+');
 		}
-		else if (f->str[0] == '-')
-		{
+		else if (f->str[0] == '-' && l--)
 			ft_putcharf('-');
-			l--;
-		}
-		f->size += 1;
-		f->fw--;
 	}
 	else if (f->space == 1 && f->str[0] != '-')
-	{
 		ft_putcharf(' ');
+	if (f->pos == 1 && (f->space == 1 && f->str[0] != '-'))
+	{
 		f->size += 1;
 		f->fw--;
 	}
@@ -85,10 +81,10 @@ void	decneghelper(f_flags **flags, int length)
 		if (f->zero != 1 && f->str[0] != '-' && f->pos == 1)
 			ft_putcharf('+');
 		putzeros(length - ft_strlen(f->str));
-		(f->str[0] == '-' && (f->pos == 1 || f->zero == 1) ? ft_putstrf(f->str + 1) : ft_putstrf(f->str));
+		ft_putstrf(f->str[0] == '-' && (f->pos == 1 || f->zero == 1) ? f->str + 1 : f->str);
 	}
 	else
-		(f->str[0] == '-' && (f->pos == 1 || f->zero == 1) ? ft_putstrf(f->str + 1) : ft_putstrf(f->str));
+		ft_putstrf(f->str[0] == '-' && (f->pos == 1 || f->zero == 1) ? f->str + 1 : f->str);
 }
 
 void	dechelp(f_flags **flags, int length)
@@ -101,10 +97,10 @@ void	dechelp(f_flags **flags, int length)
 		if ((int)ft_strlen(f->str) < length)
 		{
 			putzeros(length - ft_strlen(f->str));
-			(f->str[0] == '-' && f->pos == 1 ? ft_putstrf(f->str + 1) : ft_putstrf(f->str));
+			ft_putstrf(f->str[0] == '-' && f->pos == 1 ? f->str + 1 : f->str);
 		}
-		else 
-			(f->str[0] == '-' && f->pos == 1 ? ft_putstrf(f->str + 1) : ft_putstrf(f->str));
+		else
+			ft_putstrf(f->str[0] == '-' && f->pos == 1 ? f->str + 1 : f->str);
 		putspaces(f->fw - length);
 	}
 	else

@@ -12,7 +12,7 @@
 
 #include "fprintf.h"
 
-void 	putunsigned(va_list ap, f_flags **flags)
+void	putunsigned(va_list ap, f_flags **flags)
 {
 	f_flags *f;
 
@@ -32,9 +32,11 @@ void 	putunsigned(va_list ap, f_flags **flags)
 	else
 		f->str = putuintmax(ap, 10, 0);
 	printun(&f);
+	ft_putstrf(f->str);
+	f->size += (int)ft_strlen(f->str);
 }
 
-void 	puthex(va_list ap, f_flags **flags, int ucase)
+void	puthex(va_list ap, f_flags **flags, int ucase)
 {
 	f_flags *f;
 
@@ -56,7 +58,7 @@ void 	puthex(va_list ap, f_flags **flags, int ucase)
 	printhex(&f, ucase);
 }
 
-void 	putoctal(va_list ap, f_flags **flags)
+void	putoctal(va_list ap, f_flags **flags)
 {
 	f_flags *f;
 
@@ -78,8 +80,7 @@ void 	putoctal(va_list ap, f_flags **flags)
 	printoctal(&f);
 }
 
-
-void 	putlint(va_list ap, f_flags **flags)
+void	putlint(va_list ap, f_flags **flags)
 {
 	f_flags *f;
 

@@ -38,11 +38,11 @@ uintmax_t	ufind_digits(uintmax_t value, uintmax_t base)
 	return (digits);
 }
 
-char *itoa_base(intmax_t value, intmax_t base, int ucase)
+char		*itoa_base(intmax_t value, intmax_t base, int ucase)
 {
 	uintmax_t	max;
 	uintmax_t	size;
-	char 		*bases;
+	char		*bases;
 	char		*str;
 
 	bases = (ucase == 1) ? "0123456789ABCDEF" : "0123456789abcdef";
@@ -64,11 +64,11 @@ char *itoa_base(intmax_t value, intmax_t base, int ucase)
 	return (str);
 }
 
-char *utoa_base(uintmax_t value, uintmax_t base, int ucase)
+char		*utoa_base(uintmax_t value, uintmax_t base, int ucase)
 {
 	uintmax_t	max;
 	uintmax_t	size;
-	char 		*bases;
+	char		*bases;
 	char		*str;
 
 	bases = (ucase == 1) ? "0123456789ABCDEF" : "0123456789abcdef";
@@ -86,11 +86,11 @@ char *utoa_base(uintmax_t value, uintmax_t base, int ucase)
 	return (str);
 }
 
-char 	*itoa_base_signed(ssize_t value, int base, int ucase)
+char		*itoa_base_signed(ssize_t value, int base, int ucase)
 {
 	intmax_t	max;
 	int			size;
-	char 		*bases;
+	char		*bases;
 	char		*str;
 
 	bases = (ucase == 1) ? "0123456789ABCDEF" : "0123456789abcdef";

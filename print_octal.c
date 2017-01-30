@@ -15,7 +15,7 @@
 void	printoctal(f_flags **flags)
 {
 	f_flags *f;
-	int 	length;
+	int		length;
 
 	f = *flags;
 	length = ft_strlen(f->str);

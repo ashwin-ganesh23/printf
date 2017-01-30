@@ -15,22 +15,24 @@
 void	printun(f_flags **flags)
 {
 	f_flags *f;
-	char 	*tmp;
-	int 	length;
+	char	*tmp;
+	int		length;
+	int		strlen;
 
 	f = *flags;
-	length = ft_strlen(f->str);
+	strlen = ft_strlen(f->str);
+	length = strlen;
 	if (f->precision > length)
 		length = f->precision;
 	if (f->fw > length)
-		tmp = unhelper(&f, length);
+		tmp = unhelper(&f, length, strlen);
 	else
 	{
 		tmp = ft_strnew(length);
-		if (length > (int)ft_strlen(f->str))
+		if (length > strlen)
 		{
-			ft_strfill(tmp, '0', 0, length - ft_strlen(f->str));
-			ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str) + 1);
+			ft_strfill(tmp, '0', 0, length - strlen);
+			ft_strlcat(tmp + length - strlen, f->str, strlen + 1);
 		}
 		else
 			tmp = f->str;
@@ -38,21 +40,21 @@ void	printun(f_flags **flags)
 	f->str = tmp;
 }
 
-char	*unhelper(f_flags **flags, int length)
+char	*unhelper(f_flags **flags, int length, int strlen)
 {
 	f_flags	*f;
-	char 	*tmp;
+	char	*tmp;
 
 	f = *flags;
 	tmp = ft_strnew(f->fw);
 	if (f->neg == 1)
 	{
-		if ((int)ft_strlen(f->str) < length)
+		if (strlen < length)
 		{
-			ft_strfill(tmp, '0', 0, length - ft_strlen(f->str));
-			ft_strlcat(tmp + length - ft_strlen(f->str), f->str, ft_strlen(f->str) + 1);
+			ft_strfill(tmp, '0', 0, length - strlen);
+			ft_strlcat(tmp + length - strlen, f->str, strlen + 1);
 		}
-		else 
+		else
 			ft_strlcat(tmp, f->str, length + 1);
 		ft_strfill(tmp, ' ', length, f->fw);
 		tmp[f->fw] = '\0';
@@ -75,7 +77,7 @@ void	miniunhelper(f_flags **flags, char **tp, int length)
 		ft_strfill(tmp, '0', f->fw - length, f->fw - ft_strlen(f->str));
 		ft_strlcat(tmp + length, f->str, ft_strlen(f->str) + 1);
 	}
-	else 
+	else
 		ft_strlcat(tmp + f->fw - length, f->str, length + 1);
 	tmp[f->fw] = '\0';
 	*tp = tmp;

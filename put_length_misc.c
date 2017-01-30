@@ -20,7 +20,7 @@ char	*putsizet(va_list ap, int base, int ucase)
 	return (itoa_base((size_t)s, base, ucase));
 }
 
-char 	*putusizet(va_list ap, int base, int ucase)
+char	*putusizet(va_list ap, int base, int ucase)
 {
 	void	*s;
 

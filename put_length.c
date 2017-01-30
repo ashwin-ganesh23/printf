@@ -28,7 +28,7 @@ char	*putshort(va_list ap, int base, int ucase)
 	return (itoa_base_signed((short)c, base, ucase));
 }
 
-char 	*putint(va_list ap, int base, int ucase)
+char	*putint(va_list ap, int base, int ucase)
 {
 	void	*i;
 
