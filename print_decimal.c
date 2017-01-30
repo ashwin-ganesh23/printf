@@ -68,8 +68,10 @@ void	decposspace(f_flags **flags, int *length)
 void	decneghelper(f_flags **flags, int length)
 {
 	f_flags *f;
+	int		bol;
 
 	f = *flags;
+	bol = (f->str[0] == '-' && (f->pos == 1 || f->zero == 1)) ? 1 : 0;
 	if (f->zero == 1 && f->str[0] == '-' && f->pos != 1)
 		ft_putcharf('-');
 	if (f->precision >= (int)ft_strlen(f->str))
@@ -81,10 +83,10 @@ void	decneghelper(f_flags **flags, int length)
 		if (f->zero != 1 && f->str[0] != '-' && f->pos == 1)
 			ft_putcharf('+');
 		putzeros(length - ft_strlen(f->str));
-		ft_putstrf(f->str[0] == '-' && (f->pos == 1 || f->zero == 1) ? f->str + 1 : f->str);
+		ft_putstrf(f->str + bol);
 	}
 	else
-		ft_putstrf(f->str[0] == '-' && (f->pos == 1 || f->zero == 1) ? f->str + 1 : f->str);
+		ft_putstrf(f->str + bol);
 }
 
 void	dechelp(f_flags **flags, int length)
