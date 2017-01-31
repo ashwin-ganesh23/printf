@@ -38,6 +38,7 @@ void	printun(t_flags **flags)
 			tmp = f->str;
 	}
 	f->str = tmp;
+	ft_strdel(&tmp);
 }
 
 char	*unhelper(t_flags **flags, int length, int strlen)
